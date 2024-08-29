@@ -1,0 +1,61 @@
+{
+  "format": 1,
+  "restore": {
+    "/Users/eljav04/Desktop/Cybernetics Backend/Home Tasks/Lesson_36_HT/Lesson_36_HT/Lesson_36_HT.csproj": {}
+  },
+  "projects": {
+    "/Users/eljav04/Desktop/Cybernetics Backend/Home Tasks/Lesson_36_HT/Lesson_36_HT/Lesson_36_HT.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/eljav04/Desktop/Cybernetics Backend/Home Tasks/Lesson_36_HT/Lesson_36_HT/Lesson_36_HT.csproj",
+        "projectName": "Lesson_36_HT",
+        "projectPath": "/Users/eljav04/Desktop/Cybernetics Backend/Home Tasks/Lesson_36_HT/Lesson_36_HT/Lesson_36_HT.csproj",
+        "packagesPath": "/Users/eljav04/.nuget/packages/",
+        "outputPath": "/Users/eljav04/Desktop/Cybernetics Backend/Home Tasks/Lesson_36_HT/Lesson_36_HT/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/eljav04/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.401/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
