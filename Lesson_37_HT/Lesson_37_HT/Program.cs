@@ -315,7 +315,6 @@ Console.ReadKey();
 Console.Clear();
 goto intertactionWithProducts;
 
-
 // 7. Quit function
 Quit:
 Console.Clear();
