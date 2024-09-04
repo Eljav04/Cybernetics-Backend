@@ -5,25 +5,25 @@ using System.Text.RegularExpressions;
 using System.Collections;
 
 // Creating jagged arrey for storage products
-List<List<string>> ProductData = new()
+ArrayList ProductData = new ArrayList()
 {
-new List<string> { "Category", "Brand", "Model", "Price", "Quantity" }
+new ArrayList() { "Category", "Brand", "Model", "Price", "Quantity" },
 };
 
 
 // Notebooks
-ProductData.Add(new List<string>() { "Notebook", "Dell", "XPS 13", "999.99", "20" });
-ProductData.Add(new List<string>() { "Notebook", "Apple", "MacBook Pro", "1299.99", "15" });
-ProductData.Add(new List<string>() { "Notebook", "HP", "Spectre x360", "1099.99", "10" });
-ProductData.Add(new List<string>() { "Notebook", "Lenovo", "ThinkPad X1 Carbon", "1399.99", "5" });
-ProductData.Add(new List<string>() { "Notebook", "Asus", "ZenBook 14", "899.99", "8" });
+ProductData.Add(new ArrayList() { "Notebook", "Dell", "XPS 13", "999.99", "20" });
+ProductData.Add(new ArrayList() { "Notebook", "Apple", "MacBook Pro", "1299.99", "15" });
+ProductData.Add(new ArrayList() { "Notebook", "HP", "Spectre x360", "1099.99", "10" });
+ProductData.Add(new ArrayList() { "Notebook", "Lenovo", "ThinkPad X1 Carbon", "1399.99", "5" });
+ProductData.Add(new ArrayList() { "Notebook", "Asus", "ZenBook 14", "899.99", "8" });
 
 //Phones
-ProductData.Add(new List<string>() { "Phone", "Samsung", "Galaxy S23", "799.99", "25" });
-ProductData.Add(new List<string>() { "Phone", "Apple", "iPhone 14", "999.99", "30" });
-ProductData.Add(new List<string>() { "Phone", "Google", "Pixel 7", "599.99", "20" });
-ProductData.Add(new List<string>() { "Phone", "OnePlus", "9 Pro", "699.99", "10" });
-ProductData.Add(new List<string>() { "Phone", "Xiaomi", "Mi 11", "499.99", "18" });
+ProductData.Add(new ArrayList() { "Phone", "Samsung", "Galaxy S23", "799.99", "25" });
+ProductData.Add(new ArrayList() { "Phone", "Apple", "iPhone 14", "999.99", "30" });
+ProductData.Add(new ArrayList() { "Phone", "Google", "Pixel 7", "599.99", "20" });
+ProductData.Add(new ArrayList() { "Phone", "OnePlus", "9 Pro", "699.99", "10" });
+ProductData.Add(new ArrayList() { "Phone", "Xiaomi", "Mi 11", "499.99", "18" });
 
 //Patterns for Brand / Model / Price / Quantity
 string[] CheckPatterns = {
@@ -71,10 +71,14 @@ Console.Clear();
 for (int i = 1; i < ProductData.Count; i++)
 {
     Console.WriteLine($"Product_ID: {i}");
-    for (int j = 0; j < ProductData[i].Count; j++)
+
+    ArrayList Categories = (ArrayList)ProductData[0];
+    ArrayList Product = (ArrayList)ProductData[i];
+
+    for (int j = 0; j < Product.Count; j++)
     {
         Console.WriteLine(
-            $"{ProductData[0][j]}: {ProductData[i][j]}"
+            $"{Categories[j]}: {Product[j]}"
             );
     };
     Console.WriteLine("==========================");
@@ -111,14 +115,17 @@ else
 Console.Clear();
 for (int i = 1; i < ProductData.Count; i++)
 {
-    if (ProductData[i][0].Equals(requiredCategory))
+    ArrayList Categories = (ArrayList)ProductData[0];
+    ArrayList Product = (ArrayList)ProductData[i];
+
+    if (Product[0].Equals(requiredCategory))
     {
         Console.WriteLine($"Product_ID: {i}");
-        for (int j = 0; j < ProductData[i].Count; j++)
+        for (int j = 0; j < Product.Count; j++)
         {
 
             Console.WriteLine(
-                $"{ProductData[0][j]}: {ProductData[i][j]}"
+                $"{Categories[j]}: {Product[j]}"
                 );
 
         };
@@ -136,8 +143,10 @@ int totalQuantity = 0;
 
 for (int i = 1; i < ProductData.Count; i++)
 {
-    double currenPrice = Convert.ToDouble(ProductData[i][3]);
-    int currenQuantity = Convert.ToInt32(ProductData[i][4]);
+    ArrayList Product = (ArrayList)ProductData[i];
+
+    double currenPrice = Convert.ToDouble(Product[3]);
+    int currenQuantity = Convert.ToInt32(Product[4]);
     totalPrice += currenPrice * currenQuantity;
     totalQuantity += currenQuantity;
 }
@@ -181,10 +190,11 @@ totalQuantity = 0;
 
 for (int i = 1; i < ProductData.Count; i++)
 {
-    if (ProductData[i][0].Equals(requiredCategory))
+    ArrayList Product = (ArrayList)ProductData[i];
+    if (Product[0].Equals(requiredCategory))
     {
-        double currenPrice = Convert.ToDouble(ProductData[i][3]);
-        int currenQuantity = Convert.ToInt32(ProductData[i][4]);
+        double currenPrice = Convert.ToDouble(Product[3]);
+        int currenQuantity = Convert.ToInt32(Product[4]);
         totalPrice += currenPrice * currenQuantity;
         totalQuantity += currenQuantity;
     }
@@ -205,7 +215,7 @@ goto intertactionWithProducts;
 // 5.AddProduct function
 AddProduct:
 Console.Clear();
-List<string> new_product = new List<string>();
+ArrayList new_product = new ArrayList();
 
 Console.Clear();
 Console.WriteLine(
@@ -234,7 +244,9 @@ new_product.Add(requiredCategory);
 
 for (int i = 1; i < 5; i++)
 {
-    Console.Write($"Enter {ProductData[0][i]}: ");
+    ArrayList Categories = (ArrayList)ProductData[0];
+
+    Console.Write($"Enter {Categories[i]}: ");
     string? current_value = Convert.ToString(Console.ReadLine());
 
     Regex regex = new Regex(CheckPatterns[i - 1]);
@@ -257,19 +269,37 @@ goto intertactionWithProducts;
 // 6.SellProduct
 SellProduct:
 Console.Clear();
+
+
 for (int i = 1; i < ProductData.Count; i++)
 {
+    ArrayList Categories = (ArrayList)ProductData[0];
+    ArrayList Product = (ArrayList)ProductData[i];
+
     Console.WriteLine($"Product_ID: {i}");
-    for (int j = 0; j < ProductData[i].Count; j++)
+    for (int j = 0; j < Product.Count; j++)
     {
         Console.WriteLine(
-            $"{ProductData[0][j]}: {ProductData[i][j]}"
+            $"{Categories[j]}: {Product[j]}"
             );
     };
     Console.WriteLine("==========================");
 };
+
+int enter_id;
 Console.Write("Enter the id of product which you want to sell: ");
-int enter_id = Convert.ToInt32(Console.ReadLine());
+
+// Check if input string only contain numeric charecters
+string? input_value = Console.ReadLine();
+Regex num_regex = new Regex(CheckPatterns[3]);
+if (num_regex.IsMatch(input_value)){
+    enter_id = Convert.ToInt32(input_value);
+}
+else
+{
+    goto NonexistentOptionError;
+};
+
 if ((enter_id < ProductData.Count) && enter_id != 0)
 {
     ProductData.RemoveAt(enter_id);
