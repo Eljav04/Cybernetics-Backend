@@ -23,7 +23,7 @@ namespace InteractWithProducts_Class
         private string[] CheckPatterns = {
             @"^[a-zA-Z]+$",
             @"^[a-zA-Z0-9\s]+$",
-            @"^[0-9/,]+$",
+            @"^[0-9/,.]+$",
             @"^[0-9]+$",
         };
 
