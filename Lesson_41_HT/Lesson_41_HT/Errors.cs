@@ -30,5 +30,12 @@ namespace Errors_Class
             string errorText = "Couldn't find the required product\n" + "Try again!";
             ShowError(errorText);
         }
+
+        // Show that Not enough products left
+        public void NotEnoughCount()
+        {
+            string errorText = "Not enough products left. Couldn't sell the required product\n" + "Try again!";
+            ShowError(errorText);
+        }
     }
 }

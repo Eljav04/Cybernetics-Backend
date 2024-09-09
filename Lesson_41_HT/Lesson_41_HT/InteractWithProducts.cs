@@ -23,7 +23,7 @@ namespace InteractWithProducts_Class
         private string[] CheckPatterns = {
             @"^[a-zA-Z]+$",
             @"^[a-zA-Z0-9\s]+$",
-            @"^[0-9/.]+$",
+            @"^[0-9/,]+$",
             @"^[0-9]+$",
         };
 
@@ -61,35 +61,15 @@ namespace InteractWithProducts_Class
         // 1. ShowAllProducts function
         public void ShowAllProducts()
         {
-            ArrayList productsData = productController.ProductsData;
-            ArrayList categories = productController.Categories;
-            int counter = 0;
-
-            Console.Clear();
-            foreach(Product product in productsData)
-            {
-                Console.WriteLine($"Product_ID: {counter}");
-                Console.WriteLine(
-                    $"{categories[0]}: {product.Category}\n" +
-                    $"{categories[1]}: {product.Brand}\n" +
-                    $"{categories[2]}: {product.Model}\n" +
-                    $"{categories[3]}: {product.Price}\n" +
-                    $"{categories[4]}: {product.Quantity}\n"
-                        );
-                Console.WriteLine("==========================");
-                counter++;
-            }
+            productController.ShowAllProducts() ;   
             Console.WriteLine("Push any key to continue...");
             Console.ReadKey();
         }
 
         // 2. ShowAllProductsByCategory
+
         public void ShowAllProductsByCategory()
         {
-            ArrayList productsData = productController.ProductsData;
-            ArrayList categories = productController.Categories;
-            int counter = 0;
-
             Console.Clear();
             EnterCategory("Which category do you want to show:");
             string? requiredCategory = ChooseCategory(Console.ReadLine());
@@ -99,24 +79,7 @@ namespace InteractWithProducts_Class
                 errors.NonexistentOptionError();
                 return;
             }
-
-            Console.Clear();
-            foreach (Product product in productsData)
-            {
-                if (product.Category.Equals(requiredCategory))
-                {
-                    Console.WriteLine($"Product_ID: {counter}");
-                    Console.WriteLine(
-                        $"{categories[0]}: {product.Category}\n" +
-                        $"{categories[1]}: {product.Brand}\n" +
-                        $"{categories[2]}: {product.Model}\n" +
-                        $"{categories[3]}: {product.Price}\n" +
-                        $"{categories[4]}: {product.Quantity}\n"
-                            );
-                    Console.WriteLine("==========================");
-                }
-                    counter++;
-            }
+            productController.ShowProductsByCategory(requiredCategory);
             Console.WriteLine("Push any key to continue...");
             Console.ReadKey();
         }
@@ -211,7 +174,6 @@ namespace InteractWithProducts_Class
                 if (regex.IsMatch(current_value))
                 {
                     new_product.Add(current_value);
-              
                 }
                 else
                 {
@@ -234,6 +196,154 @@ namespace InteractWithProducts_Class
 
             productController.AddProduct(added_product); 
         }
-	}
+
+        // 6. SellProduct function
+        public void SellProduct()
+        {
+            Console.Clear();
+            EnterCategory("Product from which category do you want to sell:");
+            string? requiredCategory = ChooseCategory(Console.ReadLine());
+
+            if (requiredCategory == "")
+            {
+                errors.NonexistentOptionError();
+                return;
+            }
+
+            productController.ShowProductsByCategory(requiredCategory);
+
+            int enter_id;
+            Console.Write("Enter the id of product which you want to sell: ");
+
+            // Check if input string only contain numeric charecters
+            string? input_value = Console.ReadLine();
+            Regex num_regex = new Regex(CheckPatterns[3]);
+            if (num_regex.IsMatch(input_value))
+            {
+                enter_id = Convert.ToInt32(input_value);
+            }
+            else
+            {
+                errors.NonexistentOptionError();
+                return;
+            };
+
+            // Show selected Product for sell
+            Console.Clear();
+            Product product = (Product)productController.ProductsData[enter_id];
+            productController.ShowProduct(product, enter_id);
+
+            int enter_count;
+            Console.Write("Enter how much of product which you want to sell: ");
+
+            // Check if input string only contain numeric charecters
+            string? input_value_2 = Console.ReadLine();
+            Regex num_regex_2 = new Regex(CheckPatterns[3]);
+            if (num_regex.IsMatch(input_value))
+            {
+                enter_count = Convert.ToInt32(input_value_2);
+            }
+            else
+            {
+                errors.MistakeError();
+                return;
+            };
+
+            ArrayList productData = productController.ProductsData; 
+            if ((enter_id < productData.Count) && (enter_id >= 0))
+            {
+                if (requiredCategory.Equals(product.Category))
+                {
+                    if (product.SellProduct(enter_count))
+                    {
+                        Console.Clear();
+                        Console.WriteLine("Required product successfully sold");
+                        Console.WriteLine("Push any key to continue...");
+                        Console.ReadKey();
+                    }
+                    else
+                    {
+                        errors.NotEnoughCount();
+                    }
+                }
+                else
+                {
+                    Console.Clear();
+                    Console.WriteLine("You don't have access for sell product from another category!");
+                    Console.WriteLine("Push any key to continue...");
+                    Console.ReadKey();
+                }
+            }
+            else
+            {
+                errors.ProductFindError();
+                return;
+            }
+
+        }
+
+        // 7. RemoveProduct function
+        public void RemoveProduct()
+        {
+            Console.Clear();
+            EnterCategory("Product from which category do you want to remove:");
+            string? requiredCategory = ChooseCategory(Console.ReadLine());
+
+            if (requiredCategory == "")
+            {
+                errors.NonexistentOptionError();
+                return;
+            }
+
+            productController.ShowProductsByCategory(requiredCategory);
+
+            int enter_id;
+            Console.Write("Enter the id of product which you want to remove: ");
+
+            // Check if input string only contain numeric charecters
+            string? input_value = Console.ReadLine();
+            Regex num_regex = new Regex(CheckPatterns[3]);
+            if (num_regex.IsMatch(input_value))
+            {
+                enter_id = Convert.ToInt32(input_value);
+            }
+            else
+            {
+                errors.NonexistentOptionError();
+                return;
+            };
+
+          
+            Product product = (Product)productController.ProductsData[enter_id];
+          
+            ArrayList productData = productController.ProductsData;
+            if (requiredCategory.Equals(product.Category))
+            {
+                if (productController.RemoveProduct(enter_id))
+                {
+                    // Show selected Product for remove
+                    Console.Clear();
+                    productController.ShowProduct(product, enter_id);
+                    Console.WriteLine("Required product successfully removed");
+                    Console.WriteLine("Push any key to continue...");
+                    Console.ReadKey();
+                    
+                }
+                else
+                {
+                    Console.Clear();
+                    Console.WriteLine("You don't have access for sell product from another category!");
+                    Console.WriteLine("Push any key to continue...");
+                    Console.ReadKey();
+                }
+            }
+            else
+            {
+                errors.ProductFindError();
+                return;
+            }
+
+        }
+    }
 }
 

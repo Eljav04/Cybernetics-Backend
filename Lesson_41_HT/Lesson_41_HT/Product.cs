@@ -18,7 +18,7 @@ namespace Product_Class
         {
             if (sellQuantity <= Quantity)
             {
-                Quantity -= sellQuantity;
+                Quantity -= sellQuantity;          
                 return true;
             }
             else

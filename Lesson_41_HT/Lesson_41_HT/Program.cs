@@ -15,18 +15,18 @@ namespace Classes
             Errors errors = new();
 
             // Notebooks
-            IWP.AddProductFunc(new ArrayList() { "Notebook", "Dell", "XPS 13", "999.99", "20" });
-            IWP.AddProductFunc(new ArrayList() { "Notebook", "Apple", "MacBook Pro", "1299.99", "15" });
-            IWP.AddProductFunc(new ArrayList() { "Notebook", "HP", "Spectre x360", "1099.99", "10" });
-            IWP.AddProductFunc(new ArrayList() { "Notebook", "Lenovo", "ThinkPad X1 Carbon", "1399.99", "5" });
-            IWP.AddProductFunc(new ArrayList() { "Notebook", "Asus", "ZenBook 14", "899.99", "8" });
+            IWP.AddProductFunc(new ArrayList() { "Notebook", "Dell", "XPS 13", 999.99, "20" });
+            IWP.AddProductFunc(new ArrayList() { "Notebook", "Apple", "MacBook Pro", 1299.99, "15" });
+            IWP.AddProductFunc(new ArrayList() { "Notebook", "HP", "Spectre x360", 1099.99, "10" });
+            IWP.AddProductFunc(new ArrayList() { "Notebook", "Lenovo", "ThinkPad X1 Carbon", 1399.99, "5" });
+            IWP.AddProductFunc(new ArrayList() { "Notebook", "Asus", "ZenBook 14", 899.99, "8" });
 
             // Phones
-            IWP.AddProductFunc(new ArrayList() { "Phone", "Samsung", "Galaxy S23", "799.99", "25" });
-            IWP.AddProductFunc(new ArrayList() { "Phone", "Apple", "iPhone 14", "999.99", "30" });
-            IWP.AddProductFunc(new ArrayList() { "Phone", "Google", "Pixel 7", "599.99", "20" });
-            IWP.AddProductFunc(new ArrayList() { "Phone", "OnePlus", "9 Pro", "699.99", "10" });
-            IWP.AddProductFunc(new ArrayList() { "Phone", "Xiaomi", "Mi 11", "499.99", "18" });
+            IWP.AddProductFunc(new ArrayList() { "Phone", "Samsung", "Galaxy S23", 799.99, "25" });
+            IWP.AddProductFunc(new ArrayList() { "Phone", "Apple", "iPhone 14", 999.99, "30" });
+            IWP.AddProductFunc(new ArrayList() { "Phone", "Google", "Pixel 7", 599.99, "20" });
+            IWP.AddProductFunc(new ArrayList() { "Phone", "OnePlus", "9 Pro", 699.99, "10" });
+            IWP.AddProductFunc(new ArrayList() { "Phone", "Xiaomi", "Mi 11", 499.99, "18" });
 
             intertactionWithProducts();
 
@@ -45,7 +45,7 @@ namespace Classes
                         "4.Show total price and quantity for category\n" +
                         "5.Add product\n" +
                         "6.Sell product\n" +
-                        "7.Sell product by category\n" +
+                        "7.Remove product\n" +
                         "8.Quit\n"
                         );
                     Console.Write("Choose option: ");
@@ -68,6 +68,10 @@ namespace Classes
                             if (IWP.CreateProduct(ref new_product))
                             {
                                 IWP.AddProductFunc(new_product);
+                                Console.Clear();
+                                Console.WriteLine("Required contact added successfully");
+                                Console.WriteLine("Push any key to continue...");
+                                Console.ReadKey();
                             }
                             else
                             {
@@ -75,12 +79,12 @@ namespace Classes
                             }
                             break;
 
-                        //case "6":
-                        //    products.SellProduct();
-                        //    break;
-                        //case "7":
-                        //    SellProductByCategoryFunc();
-                        //    break;
+                        case "6":
+                            IWP.SellProduct();
+                            break;
+                        case "7":
+                            IWP.RemoveProduct();
+                            break;
                         case "8":
                             isContinue = false;
                             break;
