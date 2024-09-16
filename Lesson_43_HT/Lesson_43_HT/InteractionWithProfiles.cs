@@ -13,82 +13,196 @@ namespace Lesson_43_HT
     {
         // Creating new profileController for interact with profiles list
         public ProfileController profileController;
-        public Errors errors;
         public InteractionWithProfiles()
         {
             profileController = new ProfileController();
-            errors = new Errors();
         }
 
-        //Patterns for Brand / Model / Price / Quantity
-        private Hashtable CheckPatterns = new(){
-            {"Name", @"^[a-zA-Z]+$" },
-            {"Surname", @"^[a-zA-Z]+$" },
-            {"Age", @"^[0-9]+$" },
-            {"Email", @"^[A-Za-z0-9._%-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}" },
-            {"Password", @"^[A-Za-z0-9._%-@#&*]+$" }
-        };
-
         // Main Functionality
-        // DeleteUser function
-    //    public void DeleteUser()
-    //    {
-    //        Console.Clear();
-    //        int enter_id;
-    //        Console.Write("Enter the id of user which you want to remove: ");
 
-    //        // Check if input string only contain numeric charecters
-    //        string? input_value = Console.ReadLine();
-    //        Regex num_regex = new Regex((string)CheckPatterns["Age"]);
-    //        if (num_regex.IsMatch(input_value))
-    //        {
-    //            enter_id = Convert.ToInt32(input_value);
+        // Sign Up function
+        public bool SignUp(ref int new_userID)
+        {
+            ArrayList new_userRef = new();
 
-    //            // Check if entered id less than amount of profiles in list
-    //            if (enter_id >= productController.ProductsData.Count)
-    //            {
-    //                errors.ProductFindError();
-    //                return;
-    //            }
-    //        }
-    //        else
-    //        {
-    //            errors.NonexistentOptionError();
-    //            return;
-    //        };
+            if(profileController.CreateProfile(ref new_userRef))
+            {
+      
+                /*
+                 Creting newProfile in ArryList. Then converting from ArrayList to Profile class and
+                 adding it to ProfileData
+                 */
+                Profile new_user = ProfileController.ConvertToProfile(new_userRef);
+                profileController.AddUser(new_user);
 
+                Console.Clear();
+                Console.WriteLine("You successfully sign up at our site!");
+                Console.WriteLine("Push any key to continue...");
+                Console.ReadKey();
 
-    //        Product product = (Product)productController.ProductsData[enter_id];
+                // Return via ref id of new user
+                new_userID = new_user.Id;
+                return true;
+            };
+            return false;
+        }
 
-    //        //Check if equal choosen category and category of product
-    //        ArrayList productData = productController.ProductsData;
-    //        if (requiredCategory.Equals(product.Category))
-    //        {
-    //            if (productController.RemoveProduct(enter_id))
-    //            {
-    //                // Show selected Product for remove
-    //                Console.Clear();
-    //                productController.ShowProduct(product, enter_id);
-    //                Console.WriteLine("Required product successfully removed");
-    //                Console.WriteLine("Push any key to continue...");
-    //                Console.ReadKey();
+        // SignIn function
+        public bool SignIn(ref int userID)
+        {
+            Console.Clear();
+            Console.WriteLine("Enter your Email: ");
+            string? inputEmail = Console.ReadLine();
 
-    //            }
-    //            else
-    //            {
-    //                Console.Clear();
-    //                Console.WriteLine("You don't have access for sell product from another category!");
-    //                Console.WriteLine("Push any key to continue...");
-    //                Console.ReadKey();
-    //            }
-    //        }
-    //        else
-    //        {
-    //            errors.ProductFindError();
-    //            return;
-    //        }
+            Console.Write("Enter your Password: ");
+            string? inputPassword = Console.ReadLine();
 
+            // Check if email is coorect
+            int current_id = profileController.FindUserIDbyEmail(inputEmail);
+            if (current_id == 0) {
+                return false;
+            }
+            Profile currentProfile = profileController.GetUserById(current_id);
 
-    //    }
-    //}
+            // Check if Password is correct
+            if (currentProfile.CheckPassword(inputPassword))
+            {
+                // return user id
+                userID = current_id;
+                return true;
+            }
+            return false;
+        }
+
+        // CheckMyPasswordFunc
+        public bool CheckMyPassword(int userID)
+        {
+            Profile profile = profileController.GetUserById(userID);
+            Console.Clear();
+            Console.WriteLine("Enter password: ");
+            if (profile.CheckPassword(Console.ReadLine())){
+                return true;
+            }
+            Errors.WrongPassword();
+            return false;
+        }
+
+        // Users' functions
+        // DeleteMyProfile function
+        public bool DeleteMyProfile(int userID)
+        {
+            if (CheckMyPassword(userID))
+            {
+                profileController.DeleteById(userID);
+                Console.Clear();
+                Console.WriteLine("Your profile is deleted succesfully");
+                Console.WriteLine("Push any key to continue...");
+                Console.ReadKey();
+                return true;
+            }
+            return false;
+        }
+
+        // UpdateMyProfile function
+        public void UpdateMyProfile(int userID)
+        {
+            if (CheckMyPassword(userID))
+            {
+                profileController.UpdateByID(userID);
+            }
+        }
+
+        // Admin's functions
+        // ShowAllProfilesFunc
+        public void ShowAllProfilesFunc(int adminID)
+        {
+            if (!CheckMyPassword(adminID))
+            {
+                // End inmplementation if password is wrong
+                return;
+            }
+
+            Console.Clear();
+            profileController.ShowAllProfilesInfo();
+            Console.WriteLine("Push any key to continue...");
+            Console.ReadKey();
+        }
+
+        //DeleteProfile function
+        public void DeleteProfile(int adminID)
+        {
+            if (!CheckMyPassword(adminID))
+            {
+                // End inmplementation if password is wrong
+                return;
+            }
+
+            Console.Clear();
+            // Show all profiles for choose
+            profileController.ShowAllProfilesInfo();
+            Console.Write("Enter the id of user which you want to remove: ");
+
+            // Check if input string only contain numeric charecters
+            string? input_value = Console.ReadLine();
+            Regex num_regex = new Regex((string)Profile.CheckPatterns["Age"]);
+            if (num_regex.IsMatch(input_value))
+            {
+                int enter_id = Convert.ToInt32(input_value);
+                if (profileController.DeleteById(enter_id))
+                {
+                    Console.Clear();
+                    Console.WriteLine("This profile is deleted succesfully");
+                    Console.WriteLine("Push any key to continue...");
+                    Console.ReadKey();
+                }
+                else
+                {
+                    Errors.UserFindError();
+                };
+            }
+            else
+            {
+                Errors.NonexistentOptionError();
+                return;
+            };
+        }
+
+        //DeleteProfile function
+        public void UpddateProfile(int adminID)
+        {
+            if (!CheckMyPassword(adminID))
+            {
+                // End inmplementation if password is wrong
+                return;
+            }
+
+            Console.Clear();
+            // Show all profiles for choose
+            profileController.ShowAllProfilesInfo();
+            Console.Write("Enter the id of user which profile propertties you want to update: ");
+
+            // Check if input string only contain numeric charecters
+            string? input_value = Console.ReadLine();
+            Regex num_regex = new Regex((string)Profile.CheckPatterns["Age"]);
+            if (num_regex.IsMatch(input_value))
+            {
+                int enter_id = Convert.ToInt32(input_value);
+
+                // Check if if ProfileData exist profile with entered ID
+                if (profileController.IfExistID(enter_id))
+                {
+                    profileController.UpdateByID(enter_id);
+                }
+                else
+                {
+                    Errors.UserFindError();
+                };
+            }
+            else
+            {
+                Errors.NonexistentOptionError();
+                return;
+            };
+        }
+    }
 }

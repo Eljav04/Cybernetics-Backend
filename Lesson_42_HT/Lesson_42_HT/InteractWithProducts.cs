@@ -13,11 +13,15 @@ namespace InteractWithProducts_Class
         // Creating new productController for interact with products list
         private ProductController productController;
         private Errors errors;
+        public ArrayList categooris;
+
         public InteractWithProducts()
 		{
             productController = new ProductController();
             errors = new Errors();
-		}
+            categooris = productController.Categories;
+
+    }
        
         //Patterns for Brand / Model / Price / Quantity
         private string[] CheckPatterns = {
@@ -47,8 +51,10 @@ namespace InteractWithProducts_Class
             }
             else
             {
+                Console.WriteLine(categooris);
                 return "";
             }
+            
         }
 
         public void EnterCategory(string text)

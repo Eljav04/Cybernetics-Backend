@@ -14,69 +14,18 @@ namespace Lesson_43_HT
     {
         // Creating ArrayList that contain all profiles of users
         public ArrayList ProfilesData { get; set; }
-        public ArrayList Properties =
-            [
+
+        // Profiles properties
+        public ArrayList Properties = new() {
                 "Name", "Surname", "Age", "Email", "Password"
-            ];
+            };
+
+        // Intitial user_id for first profile, wihich will increase after every creating
+        private static int user_id = 6;
+
         public ProfileController()
         {
             ProfilesData = new();
-        }
-
-        //Patterns for Brand / Model / Price / Quantity
-        private Hashtable CheckPatterns = new(){
-            {"Name", @"^[a-zA-Z]+$" },
-            {"Surname", @"^[a-zA-Z]+$" },
-            {"Age", @"^[0-9]+$" },
-            {"Email", @"^[A-Za-z0-9._%-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}" },
-            {"Password", @"^[A-Za-z0-9._%-@#&*]+$" }
-        };
-        
-
-        // Delete function
-        public bool DeleteById(int userID)
-        {
-            if (userID < ProfilesData.Count && userID >= 0)
-            {
-                Profile current_profile = (Profile)ProfilesData[userID];
-                // Check if userRole equal User (not admin)
-                if (current_profile.Role == UserRole.User)
-                {
-                    ProfilesData.RemoveAt(userID);
-                }
-                return true;
-            }
-            return false;
-        }
-
-        // Show all profiles function
-        public void ShowAllProfilesInfo()
-        {
-            int counter = 0;
-            foreach (Profile profile in ProfilesData)
-            {
-                profile.ShowInfo(counter++);
-            }
-        }
-
-        // ConvertToProfile function by entred ArrayList
-        public Profile ConvertToProfile(ArrayList profile_ref)
-        {
-            return new Profile()
-            {
-                Role = UserRole.User,
-                Name = profile_ref[0].ToString(),
-                Surname = profile_ref[1].ToString(),
-                Age = Convert.ToInt32(profile_ref[2]),
-                Email = profile_ref[3].ToString(),
-                Password = profile_ref[4].ToString()
-            };
-        }
-
-        // Add user function
-        public void AddUser(Profile new_profile)
-        {
-            ProfilesData.Add(new_profile);
         }
 
         // Create user function 
@@ -88,7 +37,7 @@ namespace Lesson_43_HT
                 Console.Write($"Enter {property}: ");
                 string? current_value = Convert.ToString(Console.ReadLine());
 
-                Regex regex = new Regex((string)CheckPatterns[property]);
+                Regex regex = new Regex((string)Profile.CheckPatterns[property]);
                 if (regex.IsMatch(current_value))
                 {
                     new_profile.Add(current_value);
@@ -99,6 +48,118 @@ namespace Lesson_43_HT
                 };
             }
             return true;
+        }
+
+        // ConvertToProfile function by entered ArrayList
+        public static Profile ConvertToProfile(ArrayList profile_ref)
+        {
+            return new Profile()
+            {
+                Role = UserRole.User,
+                Name = profile_ref[0].ToString(),
+                Surname = profile_ref[1].ToString(),
+                Age = Convert.ToInt32(profile_ref[2]),
+                Email = profile_ref[3].ToString(),
+                Password = profile_ref[4].ToString(),
+                Id = user_id++
+            };
+        }
+
+        // Add user function
+        public void AddUser(Profile new_profile)
+        {
+            ProfilesData.Add(new_profile);
+        }
+
+        // Find User function
+        public int FindUserIDbyEmail(string inputEmail)
+        {
+            foreach (Profile profile in ProfilesData)
+            {
+                if (profile.Email.Equals(inputEmail)){
+                    return profile.Id;
+                }
+            }
+            return 0;
+        }
+
+        // Get User by Id function
+        public Profile GetUserById(int id)
+        {
+            Profile empty_profile = new();
+            foreach (Profile profile in ProfilesData)
+            {
+                if (profile.Id.Equals(id)){
+                    return profile;
+                }
+            }
+            return empty_profile;
+        }
+
+        // Show all profiles function
+        public void ShowAllProfilesInfo()
+        {
+            foreach (Profile profile in ProfilesData)
+            {
+                if (profile.Role.Equals(UserRole.User))
+                {
+                    profile.ShowInfo();
+                }
+            }
+        }
+
+        // Delete function
+        public bool DeleteById(int userID)
+        {
+            foreach (Profile profile in ProfilesData)
+            {
+                // Check if userRole equal User (not admin)
+                if (profile.Role == UserRole.User)
+                {
+                    if (profile.Id == userID)
+                    {
+                        ProfilesData.Remove(profile);
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
+        // UpdateById function
+        public void UpdateByID(int userID)
+        {
+            Console.Clear();
+            Console.WriteLine("What do you want to change?");
+            for (int i = 0; i < Properties.Count; i++)
+            {
+                Console.WriteLine($"{i+1}. Update {Properties[i]}");
+            }
+            Profile uptadted_profile = GetUserById(userID);
+            Console.Write("Choose option: ");
+            string? choosen_opt = Console.ReadLine();
+
+            Console.Write($"Enter new property : ");
+            string? new_prop = Console.ReadLine();
+
+            uptadted_profile.Update(choosen_opt, new_prop);
+
+        }
+
+        public bool IfExistID(int userID)
+        {
+            foreach (Profile profile in ProfilesData)
+            {
+                // Check if userRole equal User (not admin)
+                if (profile.Role == UserRole.User)
+                {
+                    if (profile.Id == userID)
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
         }
     }
 }
