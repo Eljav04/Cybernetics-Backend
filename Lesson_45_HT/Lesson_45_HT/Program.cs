@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections;
-using Lesson_43_HT;
+using Lesson_45_HT;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Classes
@@ -10,20 +10,23 @@ namespace Classes
         public static void Main()
         {
             InteractionWithProfiles IWP = new();
-            Profile admin_profile = new Profile(
-                UserRole.Admin, "Admin", "Admin", 99, "admin@gmail.com", "admin1234", 1);
+            // Creating and adding admin user
+            Admin admin_profile = new Admin(
+                "Admin", "Admin", "admin@gmail.com","admin1234", 1);
             IWP.profileController.AddUser(admin_profile);
+
+            // Creating and adding some example users
             IWP.profileController.AddUser(
-                new Profile(UserRole.User, "Nazim", "Jeyhunov", 25, "example@gmail.com", "1234", 2));
+                new User("Nazim", "Jeyhunov", 25, "example@gmail.com", "1234", 2));
 
             IWP.profileController.AddUser(
-                new Profile(UserRole.User, "Amina", "Aliyeva", 28, "amina_aliyeva@gmail.com", "amina5678", 3));
+                new User("Amina", "Aliyeva", 28, "amina_aliyeva@gmail.com", "amina5678", 3));
 
             IWP.profileController.AddUser(
-                new Profile(UserRole.User, "Kamran", "Qasimov", 30, "kamran_qasimov@gmail.com", "kamran9101", 4));
+                new User("Kamran", "Qasimov", 30, "kamran_qasimov@gmail.com", "kamran9101", 4));
 
             IWP.profileController.AddUser(
-                new Profile(UserRole.User, "Leyla", "Mammadova", 22, "leyla_mammadova@gmail.com", "leyla1123", 5));
+                new User("Leyla", "Mammadova", 22, "leyla_mammadova@gmail.com", "leyla1123", 5));
 
 
             LaunchProgram();
@@ -79,12 +82,10 @@ namespace Classes
                 if (IWP.SignIn(ref userID))
                 {
                     Profile checkProfile = IWP.profileController.GetUserById(userID);
-                    if (checkProfile.IfUserIsAdmin())
-                    {
+                    if (checkProfile.IfUserIsAdmin()){
                         LoggingInAsAdmin(userID);
                     }
-                    else
-                    {
+                    else {
                         LoggingInAsUser(userID);
                     }
                 }
@@ -95,8 +96,7 @@ namespace Classes
             }
 
             // Loggging in as a User
-            void LoggingInAsUser(int userID)
-            {
+            void LoggingInAsUser(int userID){
                 Profile currentUser = IWP.profileController.GetUserById(userID);
 
                 bool isContinue = true;
@@ -104,7 +104,7 @@ namespace Classes
                 {
                     Console.Clear();
                     Console.WriteLine(
-                        "Your account info: \n" +
+                        "Your account info: \n"+
                         "======================"
                         );
 
@@ -112,7 +112,7 @@ namespace Classes
                     currentUser.ShowInfo();
 
                     // Action part
-                    Console.WriteLine("What do you want to do?\n" +
+                    Console.WriteLine("What do you want to do?\n"+
                             "1. Update\n" +
                             "2. Remove my profile\n" +
                             "3. Quit");
@@ -124,8 +124,7 @@ namespace Classes
                             IWP.UpdateMyProfile(userID);
                             break;
                         case "2":
-                            if (IWP.DeleteMyProfile(userID))
-                            {
+                            if (IWP.DeleteMyProfile(userID)){                       
                                 isContinue = false;
                             };
                             break;
