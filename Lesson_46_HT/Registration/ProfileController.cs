@@ -8,7 +8,7 @@ using System.Reflection;
 using System.ComponentModel.DataAnnotations;
 using System.Text.RegularExpressions;
 
-namespace Lesson_45_HT
+namespace Registration
 {
     public abstract class ProfileController
     {

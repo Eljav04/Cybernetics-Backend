@@ -13,19 +13,19 @@ namespace Classes
             // Creating and adding admin user
             Admin admin_profile = new Admin(
                 "Admin", "Admin", "admin@gmail.com","admin1234", 1);
-            IWP.profileController.AddUser(admin_profile);
+            IWP.adminController.AddUser(admin_profile);
 
             // Creating and adding some example users
-            IWP.profileController.AddUser(
+            IWP.usersController.AddUser(
                 new User("Nazim", "Jeyhunov", 25, "example@gmail.com", "1234", 2));
 
-            IWP.profileController.AddUser(
+            IWP.usersController.AddUser(
                 new User("Amina", "Aliyeva", 28, "amina_aliyeva@gmail.com", "amina5678", 3));
 
-            IWP.profileController.AddUser(
+            IWP.usersController.AddUser(
                 new User("Kamran", "Qasimov", 30, "kamran_qasimov@gmail.com", "kamran9101", 4));
 
-            IWP.profileController.AddUser(
+            IWP.usersController.AddUser(
                 new User("Leyla", "Mammadova", 22, "leyla_mammadova@gmail.com", "leyla1123", 5));
 
 
@@ -79,9 +79,9 @@ namespace Classes
             void SignInFunc()
             {
                 int userID = 0;
-                if (IWP.SignIn(ref userID))
+                Profile checkProfile = new();
+                if (IWP.SignIn(ref userID, ref checkProfile))
                 {
-                    Profile checkProfile = IWP.profileController.GetUserById(userID);
                     if (checkProfile.IfUserIsAdmin()){
                         LoggingInAsAdmin(userID);
                     }
@@ -97,7 +97,7 @@ namespace Classes
 
             // Loggging in as a User
             void LoggingInAsUser(int userID){
-                Profile currentUser = IWP.profileController.GetUserById(userID);
+                Profile currentUser = IWP.usersController.GetUserById(userID);
 
                 bool isContinue = true;
                 while (isContinue)
@@ -143,7 +143,7 @@ namespace Classes
             // Logging in as a Admin
             void LoggingInAsAdmin(int userID)
             {
-                Profile currentUser = IWP.profileController.GetUserById(userID);
+                Profile currentUser = IWP.adminController.GetUserById(userID);
 
                 bool isContinue = true;
                 while (isContinue)
