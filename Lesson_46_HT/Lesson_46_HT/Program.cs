@@ -20,6 +20,7 @@ namespace Classes
             AddDefaultMotos();
             AddDefaultTrucks();
 
+
             LaunchProgram();
 
             // Main part the project, which start infinite getting and preprocessing promts
