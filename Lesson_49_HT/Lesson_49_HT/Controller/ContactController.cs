@@ -14,8 +14,12 @@ namespace Lesson_49_HT.Controller
     internal class ContactController : IContactControler
     {
         public MyList<Contact> ContactList { get; set; }
-        public ContactController() {
+        public ContactController(List<Contact> list) {
             ContactList = new();
+            foreach (var item in list)
+            {
+                ContactList.Add(item);
+            }
         }
 
         public void ShowAllInfo()
@@ -23,6 +27,22 @@ namespace Lesson_49_HT.Controller
             Console.WriteLine("Contacts Info: ");
             Console.WriteLine("==========================");
             foreach (Contact conatct in ContactList)
+            {
+                conatct.ShowInfo();
+            }
+        }
+
+        public static void ShowAllInfo(List<Contact> required_list)
+        {
+            foreach (Contact conatct in required_list)
+            {
+                conatct.ShowInfo();
+            }
+        }
+
+        public static void ShowAllInfo(MyList<Contact> required_list)
+        {
+            foreach (Contact conatct in required_list)
             {
                 conatct.ShowInfo();
             }
@@ -88,7 +108,7 @@ namespace Lesson_49_HT.Controller
             return false;
         }
 
-        public Contact GetContactByID(int contactID)
+        public Contact? GetContactByID(int contactID)
         {
             foreach (Contact contact in ContactList)
             {
@@ -99,6 +119,22 @@ namespace Lesson_49_HT.Controller
             }
             return null;
         }
+
+        public List<Contact> GetContactByName(string contact_name)
+        {
+            return ContactList.Where<Contact>(c => c.SearchByName(contact_name)).ToList();
+
+        }
+        public List<Contact> GetContactBySurname(string contact_surname)
+        {
+            return (List<Contact>)ContactList.Where<Contact>(c => c.SearchBySurname(contact_surname)).ToList();
+        }
+
+        public List<Contact> GetContactByPhoneNumber(string contact_number)
+        {
+            return (List<Contact>)ContactList.Where<Contact>(c => c.SearchByPhoneNumber(contact_number)).ToList();
+        }
+
 
 
     }

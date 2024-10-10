@@ -14,9 +14,8 @@ namespace Lesson_49_HT.Controller.Interfaces
 
         public void ShowAllInfo();
         public void AddContact(Contact new_contact);
-        public Contact ConvertToContact(MyList<string> list);
-        public MyList<string> CreateContact();
         public bool DeleteContact(int contactID);
         public bool IfExist(int contactID);
+        public Contact? GetContactByID(int contactID);
     }
 }

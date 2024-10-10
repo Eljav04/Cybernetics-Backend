@@ -31,7 +31,7 @@ namespace Lesson_49_HT.Services.Messages
 
         public static void ContactDeleted()
         {
-            string messageText = $"New contact deleted successfully! \n" +
+            string messageText = $"Contact deleted successfully! \n" +
                 "Push any key to continue...";
             Console.Clear();
             ShowMessage(messageText);

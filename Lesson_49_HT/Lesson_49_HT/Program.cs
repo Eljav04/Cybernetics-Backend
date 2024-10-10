@@ -6,20 +6,30 @@ using Lesson_49_HT.Model;
 using Lesson_49_HT.Controller;
 using Lesson_49_HT.Services.Messages;
 using System.Text.RegularExpressions;
+using Lesson_49_HT.Services;
 
-ContactController contactController = new();
+string path = @"Contacts.txt";
 
-contactController.AddContact(new Contact("Seymur", "Vasifov", "+994508583748"));
-contactController.AddContact(new Contact("Rasim", "Tairov", "+994705342305"));
-contactController.AddContact(new Contact("Lale", "Resulova", "+994103204567"));
+if (!File.Exists(path))
+{
+    FileStream fileStream = new FileStream(path, FileMode.Create);
+    fileStream.Close();
+}
 
+ContactController contactController = new(FileServices<Contact>.GetData(path));
+
+
+
+//contactController.AddContact(new Contact("Seymur", "Vasifov", "+994508583748"));
+//contactController.AddContact(new Contact("Rasim", "Tairov", "+994705342305"));
+//contactController.AddContact(new Contact("Lale", "Resulova", "+994103204567"));
+
+IntertactionWithContatcs();
 void IntertactionWithContatcs()
 {
     bool isContinue = true;
 
-    while (isContinue)
-    {
-
+    while (isContinue) {
 
         Console.Clear();
         Console.WriteLine(
@@ -43,12 +53,15 @@ void IntertactionWithContatcs()
                 DeleteContact();
                 break;
             case "4":
+                Console.Clear();
                 contactController.ShowAllInfo();
                 Message.EndOfProcess();
                 break;
             case "5":
+                Search();
                 break;
             case "6":
+                Quit();
                 isContinue = false;
                 break;
             default:
@@ -64,7 +77,7 @@ void IntertactionWithContatcs()
 void AddContact()
 {
     MyList<string> new_contact = contactController.CreateContact();
-    if (new_contact.Equals(null))
+    if (new_contact is null)
     {
         Errors.MistakeError();
     }
@@ -96,14 +109,13 @@ void EditContact()
 
     Contact current_contact = contactController.GetContactByID(edit_id);
 
-    if (current_contact.Equals(null))
+    if (current_contact is null)
     {
         Errors.ContactFindError();
         return;
     }
     Console.Clear();
     current_contact.ShowInfo();
-    Console.WriteLine("==========================");
     Console.WriteLine(
     "Which parametr do you want to change:\n" +
     "1.Name\n" +
@@ -156,109 +168,87 @@ void DeleteContact()
 }
 
 
-
 // 5. Search function
-Search:
-
-// Variable that can help to determine if could find any contact
-bool isFoundAnyContact = false;
-
-Console.Clear();
-Console.WriteLine(
-    "How do you want to find contact:\n" +
-    "1. By ID\n" +
-    "2. By Name\n" +
-    "3. By Surname\n" +
-    "4. By Phone Number\n"
-    );
-Console.Write("Choose option: ");
-switch (Convert.ToString(Console.ReadLine()))
+void Search()
 {
-    case "1":
-        Console.Write("Enter ID: ");
-        int input_id = Convert.ToInt32(Console.ReadLine());
-        if (input_id < ContactsData.Length)
-        {
+    // Variable that can help to determine if could find any contact
+    bool isFoundAnyContact = false;
+    List<Contact> finded_contatcs = new();
+
+    Console.Clear();
+    Console.WriteLine(
+        "How do you want to find contact:\n" +
+        "1. By ID\n" +
+        "2. By Name\n" +
+        "3. By Surname\n" +
+        "4. By Phone Number\n"
+        );
+    Console.Write("Choose option: ");
+    switch (Console.ReadLine())
+    {
+        case "1":
+            Console.Write("Enter ID: ");
+            dynamic search_id = Console.ReadLine();
+            if (!Patterns.RE_numeric.IsMatch(search_id))
+            {
+                Errors.MistakeError();
+                return;
+            }
+            else
+            {
+                search_id = Convert.ToInt32(search_id);           
+            }
+
+            Contact finded_contact = contactController.GetContactByID(search_id);
+            if (finded_contact is not null)
+            {
+                Console.Clear();
+                finded_contact.ShowInfo();
+                isFoundAnyContact = true;
+            }
+            break;
+        case "2":
+            Console.Write("Enter Name: ");
+            string? input_name = Console.ReadLine();
             Console.Clear();
-            Console.WriteLine($"Contact_ID: {input_id}");
-            for (int i = 0; i < ContactsData[input_id].Length; i++)
-            {
-                Console.WriteLine(
-                    $"{ContactsData[0][i]}: {ContactsData[input_id][i]}"
-                    );
-            };
-            Console.ReadKey();
-        }
-        else
-        {
-            goto ContactFindError;
-        };
-        goto intertactionWithContatcs;
-    case "2":
-        Console.Write("Enter Name: ");
-        string input_name = Convert.ToString(Console.ReadLine()).ToLower();
-        Console.Clear();
-        for (int i = 1; i < ContactsData.Length; i++)
-        {
-            if (ContactsData[i][0].ToLower() == input_name)
-            {
-                Console.WriteLine($"Contact_ID: {i}");
-                for (int j = 0; j < ContactsData[i].Length; j++)
-                {
-                    Console.WriteLine(
-                        $"{ContactsData[0][j]}: {ContactsData[i][j]}"
-                        );
-                };
-                Console.WriteLine("==========================");
-                isFoundAnyContact = true;
-            }
-        };
-        break;
-    case "3":
-        Console.Write("Enter Surname: ");
-        string input_surname = Convert.ToString(Console.ReadLine()).ToLower();
-        Console.Clear();
-        for (int i = 1; i < ContactsData.Length; i++)
-        {
-            if (ContactsData[i][1].ToLower() == input_surname)
-            {
-                Console.WriteLine($"Contact_ID: {i}");
-                for (int j = 0; j < ContactsData[i].Length; j++)
-                {
-                    Console.WriteLine(
-                        $"{ContactsData[0][j]}: {ContactsData[i][j]}"
-                        );
-                };
-                Console.WriteLine("==========================");
-                isFoundAnyContact = true;
-            }
-        };
-        break;
-    case "4":
-        Console.Write("Enter Phone Number: ");
-        string input_number = Convert.ToString(Console.ReadLine());
-        Console.Clear();
-        for (int i = 1; i < ContactsData.Length; i++)
-        {
-            if (ContactsData[i][2] == input_number)
-            {
-                Console.WriteLine($"Contact_ID: {i}");
-                for (int j = 0; j < ContactsData[i].Length; j++)
-                {
-                    Console.WriteLine(
-                        $"{ContactsData[0][j]}: {ContactsData[i][j]}"
-                        );
-                };
-                Console.WriteLine("==========================");
-                isFoundAnyContact = true;
-            }
-        };
-        break;
-    default:
-        goto NonexistentOptionError;
+            finded_contatcs = contactController.GetContactByName(input_name);
+            ContactController.ShowAllInfo(finded_contatcs);
+            break;
+        case "3":
+            Console.Write("Enter Surname: ");
+            string? input_surname = Console.ReadLine();
+            Console.Clear();
+            finded_contatcs = contactController.GetContactBySurname(input_surname);
+            ContactController.ShowAllInfo(finded_contatcs);
+            break;
+        case "4":
+            Console.Write("Enter Phone number: ");
+            string? input_number = Console.ReadLine();
+            Console.Clear();
+            finded_contatcs = contactController.GetContactByPhoneNumber(input_number);
+            ContactController.ShowAllInfo(finded_contatcs);
+            break;
+        default:
+            Errors.NonexistentOptionError();
+            return;
+    }
+    // If list is empty => no contact is finded
+    if (finded_contatcs.Count > 0)
+    {
+        isFoundAnyContact = true;
+    }
+
+    if (!isFoundAnyContact)
+    {
+        Errors.ContactFindError();
+    }
+    else
+    {
+        Message.EndOfProcess();
+    }
 }
 
-if (!isFoundAnyContact)
+void Quit()
 {
-    goto ContactFindError;
+    FileServices<Contact>.SaveData(contactController.ContactList.ToList(), path);
 }

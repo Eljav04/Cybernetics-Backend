@@ -493,6 +493,15 @@ namespace MyColection.Generic
             return -1;
         }
 
+        public List<T> ToList()
+        {
+            List<T> output_list = new();
+            foreach (T item in this)
+            {
+                output_list.Add(item);
+            }
+            return output_list;
+        }
 
 
     }

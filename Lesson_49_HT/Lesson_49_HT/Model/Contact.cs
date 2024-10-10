@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Lesson_49_HT.Services.Patterns;
 using Lesson_49_HT.Services.AutoIncremnet;
 using MyColection.Generic;
+using System.Xml.Linq;
 
 namespace Lesson_49_HT.Model
 {
@@ -18,11 +19,12 @@ namespace Lesson_49_HT.Model
 
         public static readonly MyList<string> Properties = new()
         {
-            "Name", "Surname", "Phone number"
+            "Name", "Surname", "PhoneNumber"
         };
 
         public Contact()
-        {       
+        {
+            ID = AutoIncrement.GetUserId();
         }
 
         public Contact(string name, string surname, string phonenumber)
@@ -35,11 +37,11 @@ namespace Lesson_49_HT.Model
 
         public void ShowInfo()
         {
-            Console.WriteLine($"" +
+            Console.WriteLine(
                 $"Contact ID: {ID}\n" +
-                $" Name: {Name}\n " +
-                $" Surname: {Surname}\n " +
-                $" Phone number: {PhoneNumber}\n " +
+                $"Name: {Name}\n" +
+                $"Surname: {Surname}\n" +
+                $"Phone number: {PhoneNumber}\n" +
                 "=========================="
                 );
         }
@@ -51,7 +53,7 @@ namespace Lesson_49_HT.Model
                 Name = new_value;
                 return true;
             }
-            return true;
+            return false;
         }
 
         public bool UpdateSurname(string new_value)
@@ -61,7 +63,7 @@ namespace Lesson_49_HT.Model
                 Name = new_value;
                 return true;
             }
-            return true;
+            return false;
         }
 
         public bool UpdatePhonenumber(string new_value)
@@ -71,7 +73,7 @@ namespace Lesson_49_HT.Model
                 Name = new_value;
                 return true;
             }
-            return true;
+            return false;
         }
 
         public bool Update(string new_value, string choosen_option)
@@ -101,7 +103,41 @@ namespace Lesson_49_HT.Model
             }
         }
 
+        public bool SearchByID(int contac_ID)
+        {
+            if (contac_ID.Equals(ID))
+            {
+                return true;
+            }
+            return false;
+        }
 
+        public bool SearchByName(string name)
+        {
+            if (name.ToLower() == Name.ToLower())
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public bool SearchBySurname(string surname)
+        {
+            if (surname.ToLower() == Surname.ToLower())
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public bool SearchByPhoneNumber(string number)
+        {
+            if (number.ToLower() == PhoneNumber.ToLower())
+            {
+                return true;
+            }
+            return false;
+        }
 
     }
 }

@@ -10,7 +10,7 @@ namespace Lesson_49_HT.Services.Patterns
         public static readonly Dictionary<string, string> CheckPatterns = new(){
             {"Name", @"^[a-zA-Z]+$" },
             {"Surname", @"^[a-zA-Z]+$" },
-            {"PhoneNumer",  @"(^\+994(50|51|55|70|99|12|10|77)[0-9]{7}$)|(^0(50|51|55|70|99|12|10|77)[0-9]{7}$)" }
+            {"PhoneNumber",  @"(^\+994(50|51|55|70|99|12|10|77)[0-9]{7}$)|(^0(50|51|55|70|99|12|10|77)[0-9]{7}$)" }
 
 };
         public readonly static Regex RE_name = new Regex(CheckPatterns["Name"]);
