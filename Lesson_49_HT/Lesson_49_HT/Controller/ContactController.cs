@@ -4,12 +4,14 @@ using System.Text;
 using System.Threading.Tasks;
 using MyColection.Generic;
 using Lesson_49_HT.Model;
+using Lesson_49_HT.Controller.Interfaces;
+using Lesson_49_HT.Services.Patterns;
 using System.Diagnostics.Contracts;
 using System.Text.RegularExpressions;
 
 namespace Lesson_49_HT.Controller
 {
-    internal class ContactController
+    internal class ContactController : IContactControler
     {
         public MyList<Contact> ContactList { get; set; }
         public ContactController() {
@@ -31,8 +33,7 @@ namespace Lesson_49_HT.Controller
             ContactList.Add(new_contact);
         }
 
-
-        public Contact ConvertToContact(MyList<string> list)
+        public static Contact ConvertToContact(MyList<string> list)
         {
             return new Contact(
                 list[0],
@@ -44,22 +45,61 @@ namespace Lesson_49_HT.Controller
         {
             Console.Clear();
             MyList<string> new_contact = new();
-            for (int i = 0; i < 3; i++)
+            foreach (string prop in Contact.Properties)
             {
-                Console.Write($"Enter {Contact.Properties[0]}: ");
+                Console.Write($"Enter {prop}: ");
                 string? current_value = Console.ReadLine();
 
-                Regex current_regex = new Regex(CheckPatterns[i]);
-                if (regex.IsMatch(current_value))
+                Regex current_regex = new Regex(Patterns.CheckPatterns[prop]);
+                if (current_regex.IsMatch(current_value))
                 {
-                    new_contact[i] = current_value;
+                    new_contact.Add(current_value);
                 }
                 else
                 {
-                    goto MistakeError;
+                    return null;
                 };
-            };
+            }
+            return new_contact;
         }
+
+        public bool DeleteContact(int contactID)
+        {
+            foreach (Contact contact in ContactList)
+            {
+                if (contact.ID == contactID)
+                {
+                    ContactList.Remove(contact);
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public bool IfExist(int contactID)
+        {
+            foreach (Contact contact in ContactList)
+            {
+                if (contact.ID.Equals(contactID))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public Contact GetContactByID(int contactID)
+        {
+            foreach (Contact contact in ContactList)
+            {
+                if (contact.ID == contactID)
+                {
+                    return contact;
+                }
+            }
+            return null;
+        }
+
 
     }
 }

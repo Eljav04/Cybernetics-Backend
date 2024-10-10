@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AdditionalTools.Messages
+namespace Lesson_49_HT.Services.Messages
 {
     public static class Message
     {
@@ -20,20 +20,6 @@ namespace AdditionalTools.Messages
             Console.ReadKey();
         }
 
-     
-
-        // Message that inform user about ending of some action
-        public static void ChooseVehicle()
-        {
-            string messageText =
-                "Choose type of vehicle\n" +
-                "1.Car \n" +
-                "2.Motorcycle \n" +
-                "3.Truck \n";
-            Console.Clear();
-            ShowMessage(messageText);
-        }
-
         public static void NewContactAdded()
         {
             string messageText = $"New contact added successfully! \n" +
@@ -46,6 +32,15 @@ namespace AdditionalTools.Messages
         public static void ContactDeleted()
         {
             string messageText = $"New contact deleted successfully! \n" +
+                "Push any key to continue...";
+            Console.Clear();
+            ShowMessage(messageText);
+            Console.ReadKey();
+        }
+
+        public static void ContactUpdated()
+        {
+            string messageText = $"Contact updated successfully! \n" +
                 "Push any key to continue...";
             Console.Clear();
             ShowMessage(messageText);

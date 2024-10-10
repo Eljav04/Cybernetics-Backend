@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AdditionalTools.Messages
+namespace Lesson_49_HT.Services.Messages
 {
     public static class Errors
     {
