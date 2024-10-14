@@ -5,7 +5,7 @@ namespace Lesson_50_HT.Model
 {
 	internal class Admin
 	{
-		public int ID { get; set; }
+		public int ID { get; private set; }
         public string Name { get; set; }
 		public string Surname { get; set; }
 		public string Login { get; set; }

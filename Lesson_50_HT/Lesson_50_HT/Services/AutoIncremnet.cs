@@ -7,10 +7,13 @@ namespace Lesson_50_HT.Services.AutoIncrement
         private static int student_id = 1;
         private static int admin_id = 1;
         private static int queston_id = 1;
+        private static int category_id = 1;
+
 
         public static int GetStudentID() => student_id++;
         public static int GetAdminID() => admin_id++;
         public static int GetQuestionID() => queston_id++;
+        public static int GetCategoryID() => category_id++;
     }
 }
 

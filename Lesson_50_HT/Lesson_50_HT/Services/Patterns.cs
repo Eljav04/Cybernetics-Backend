@@ -15,7 +15,6 @@ namespace Lesson_50_HT.Services.Patterns
 };
         public readonly static Regex RE_name = new Regex(CheckPatterns["Name"]);
         public readonly static Regex RE_surname = new Regex(CheckPatterns["Surname"]);
-        public readonly static Regex RE_phone_number = new Regex(CheckPatterns["PhoneNumber"]);
 
         public readonly static Regex RE_numeric = new Regex(@"^[0-9]+$");
 

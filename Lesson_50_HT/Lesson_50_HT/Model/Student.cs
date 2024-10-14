@@ -1,17 +1,23 @@
 ﻿using System;
 using Lesson_50_HT.Services.AutoIncrement;
-using Lesson_50_HT.Services.PasswordGenerator;
+using Lesson_50_HT.Services.RandomGenerator;
 
 namespace Lesson_50_HT.Model
 {
 	internal class Student
 	{
-        public int ID { get; set; }
+        public int ID { get; private set; }
         public string Name { get; set; }
         public string Surname { get; set; }
         public string Login { get; set; }
-        public int Password { get; set; }
-        public string Category { get; set; }
+        public string Password { get; set; }
+        public int Category { get; set; }
+
+        public static readonly List<string> Properties = new()
+        {
+            "Name", "Surname", "Login"
+        };
+
 
         public Student()
         {
@@ -21,14 +27,16 @@ namespace Lesson_50_HT.Model
         public Student(
             string name,
             string surname,
-            string login
+            string login,
+            int category_id
             )
         {
             ID = AutoIncrement.GetAdminID();
             Name = name;
             Surname = surname;
             Login = login;
-            Password = PasswordGenerator.GeneratePassword();
+            Password = RandomGenerator.GeneratePassword();
+            Category = category_id;
         }
 
         public void ShowInfo()
@@ -39,6 +47,7 @@ namespace Lesson_50_HT.Model
                 $"Surname: {Surname}\n" +
                 $"Login: {Login}\n" +
                 $"Password: {Password}\n" +
+                $"Category ID: {Category}\n" +
                 "=========================="
                 );
         }

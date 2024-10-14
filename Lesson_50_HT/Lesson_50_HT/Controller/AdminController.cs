@@ -29,6 +29,16 @@ namespace Lesson_50_HT.Controller
 			return false;
 		}
 
+		public Admin? GetAdminByLogin(string login)
+		{
+			foreach (Admin admin in AdminsList) {
+				if (admin.Login == login) {
+					return admin;
+				}
+			}
+			return null;
+		}
+
 
 	}
 }
