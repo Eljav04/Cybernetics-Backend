@@ -9,12 +9,16 @@ namespace Lesson_50_HT.Controller
 	{
 		public List<Student> StudentList { get; set; }
 
+        public List<Result> ResultsList { get; set; }
 
-
-        public StudentController(List<Student> studentList)
+        public StudentController(
+            List<Student> studentList,
+            List<Result> resultList)
 		{
             this.StudentList = studentList;
-		}
+            this.ResultsList = resultList;
+
+        }
 
         public void Add(Student new_student)
         {

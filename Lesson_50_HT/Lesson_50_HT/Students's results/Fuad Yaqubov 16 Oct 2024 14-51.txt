@@ -1,0 +1,14 @@
+Student info: 
+	Name: Fuad
+	Surname: Yaqubov
+	Login: fuad@gmai.com
+
+Exam info:
+Subject: IT
+Finished in 10/16/2024 2:51:10 PM
+Right answers: 1
+Wrong answers: 3
+Skipped questions: 0
+============================
+Your overall score: 25 / 100
+Exam passed: No

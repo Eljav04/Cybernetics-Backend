@@ -18,7 +18,7 @@ namespace Lesson_50_HT.Services.Messages
         // Show mistake error and interrupt implementing a process
         public static void LogginInMistake()
         {
-            string errorText = "Login or password is not correct!\n Please try again";
+            string errorText = "Login or password is not correct!\nPlease try again!";
             ShowError(errorText);
         }
 

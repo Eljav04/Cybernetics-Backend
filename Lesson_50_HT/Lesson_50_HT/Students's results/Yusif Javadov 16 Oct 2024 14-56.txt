@@ -1,0 +1,14 @@
+Student info: 
+	Name: Yusif
+	Surname: Javadov
+	Login: yusif@gmail.com
+
+Exam info:
+Subject: IT
+Finished in 10/16/2024 2:56:19 PM
+Right answers: 1
+Wrong answers: 1
+Skipped questions: 2
+============================
+Your overall score: 25 / 100
+Exam passed: No

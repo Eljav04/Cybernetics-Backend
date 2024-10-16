@@ -1,0 +1,14 @@
+Student info: 
+	Name: Alishan
+	Surname: Bakir
+	Login: alishan@gmail.com
+
+Exam info:
+Subject: IT
+Finished in 10/16/2024 2:07:42 PM
+Right answers: 4
+Wrong answers: 0
+Skipped questions: 0
+============================
+Your overall score: 100 / 100
+Exam passed: Yes

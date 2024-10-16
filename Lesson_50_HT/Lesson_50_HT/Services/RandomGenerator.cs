@@ -17,13 +17,16 @@ namespace Lesson_50_HT.Services.RandomGenerator
     {
         public static void ShuffleList(ref List<T> list)
         {
+            Random random = new();
+
             for (int i = 0; i < list.Count; i++)
             {
-                Random random = new();
                 int first = random.Next(0, list.Count);
                 int second = random.Next(0, list.Count);
 
-                (list[first], list[second]) = (list[second], list[first]);
+                T value = list[first];
+                list[first] = list[second];
+                list[second] = value;
             }
         }
     }

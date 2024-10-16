@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Lesson_50_HT.Model;
 
 namespace Lesson_50_HT.Services.Messages
 {
-    public static class Message
+    internal static class Message
     {
         public static void ShowMessage(string messageText)
         {
@@ -90,33 +91,42 @@ namespace Lesson_50_HT.Services.Messages
             Console.ReadKey();
         }
 
-        public static void ExamFinised(
-            string category,
-            int questions_count,
-            int skipped_questions,
-            int right_answers,
-            int wrong_answers
-            )
+        public static void ExamFinised(Result result, string category_name)
         {
-            decimal ovarall_score = Math.Round(
-                Convert.ToDecimal(right_answers) * 100 /
-                Convert.ToDecimal(questions_count));
-
-            string exam_passer_status = (ovarall_score >= 50) ? "Yes" : "No";
-
-            string errorText = $"You succesfully finished your \"{category}\" exam\n" +
+            string errorText = $"You succesfully finished your {category_name} exam\n" +
                 $"Here is your results:\n" +
-                $"Finished in {DateTime.Now.ToString()}\n" +
-                $"Right answers: {right_answers}\n" +
-                $"Wrong answers: {wrong_answers}\n" +
-                $"Skipped questions: {skipped_questions}\n" +
+                $"Finished in {result.Time.ToString()}\n" +
+                $"Right answers: {result.RightAnswers}\n" +
+                $"Wrong answers: {result.WrongAnswers}\n" +
+                $"Skipped questions: {result.SkippedQuestionCount}\n" +
                 $"============================\n" +
-                $"Your overall score: {ovarall_score} / 100\n" +
-                $"Exam passed: {exam_passer_status}";
+                $"Your overall score: {result.OverallScore} / 100\n" +
+                $"Exam passed: {result.PassStatus}";
 
             Console.Clear();
             ShowMessage(errorText);
             Console.ReadKey();
+        }
+
+        public static string GetResultsText(Result result, string category_name)
+        {
+            string errorText =
+                $"Student info: \n" +
+                $"\tName: {result.StudentName}\n" +
+                $"\tSurname: {result.StudentSurname}\n" +
+                $"\tLogin: {result.StudentLogin}\n" +
+                $"\n" +
+                $"Exam info:\n" +
+                $"Subject: {category_name}\n" +
+                $"Finished in {result.Time.ToString()}\n" +
+                $"Right answers: {result.RightAnswers}\n" +
+                $"Wrong answers: {result.WrongAnswers}\n" +
+                $"Skipped questions: {result.SkippedQuestionCount}\n" +
+                $"============================\n" +
+                $"Your overall score: {result.OverallScore} / 100\n" +
+                $"Exam passed: {result.PassStatus}";
+
+            return errorText;
         }
 
     }

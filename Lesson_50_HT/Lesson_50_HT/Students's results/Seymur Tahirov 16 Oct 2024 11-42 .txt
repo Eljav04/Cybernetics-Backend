@@ -1,0 +1,14 @@
+Student info: 
+	Name: Seymur
+	Surname: Tahirov
+	Login: seymur@gmail.com
+
+Exam info:
+Subject: IT
+Finished in 10/16/2024 11:42:49 AM
+Right answers: 3
+Wrong answers: 0
+Skipped questions: 0
+============================
+Your overall score: 100 / 100
+Exam passed: Yes

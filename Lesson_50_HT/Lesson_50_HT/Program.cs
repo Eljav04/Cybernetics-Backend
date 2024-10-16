@@ -17,19 +17,25 @@ for (int i = 0; i < 4; i++)
 }
 
 Directory.CreateDirectory(main_path + "/data");
+
+Directory.CreateDirectory(main_path + "/Students's results");
+
+string students_result_path = main_path + "/Students's results/";
 main_path += "/data/";
 
 
 
 string student_path = "students.txt";
 string category_path = "categories.txt";
+string results_path = "results.txt";
 
 _create_default_neccessary_files();
 
 
 AdminController adminController = new AdminController();
 StudentController studentController = new StudentController(
-    FileServices<Student>.GetData(main_path + student_path));
+    FileServices<Student>.GetData(main_path + student_path),
+    FileServices<Result>.GetData(main_path + results_path));
 
 CategoryController categoryController = new CategoryController(
     FileServices<Category>.GetData(main_path + category_path));
@@ -136,8 +142,10 @@ void LoggingInAsAdmin(Admin currentAdmin)
                 Message.EndOfProcess();
                 break;
             case "2":
-                break;
+                Console.Clear();
+                ResultsController.ShowAllResult(studentController.ResultsList);
                 Message.EndOfProcess();
+                break;
             case "3":
                 AddStudentFunc();
                 break;
@@ -442,14 +450,14 @@ void LogginInAsStudent(Student current_student)
             break;
         }
 
-        // Minus -1 becase answesr count start from 1
-        choosen_answer--;
-
         if (current_question.Answers.Count < choosen_answer)
         {
             Errors.MistakeError();
             continue;
         }
+
+        // Minus -1 becase answesr count start from 1
+        choosen_answer--;
 
         if (choosen_answer == current_question.RightAnswerID)
         {
@@ -463,12 +471,40 @@ void LogginInAsStudent(Student current_student)
         counter++;
     }
 
-    Message.ExamFinised(
-        categoryController.GetCategotyByID(current_student.Category).Name,
-        question_list.Count,
-        question_list.Count - counter,
+    Result new_result = new(
+        current_student.Name,
+        current_student.Surname,
+        current_student.Login,
         right_answers,
-        wrong_answers);
+        wrong_answers,
+        question_list.Count,
+        question_list.Count - counter); ;
+
+    // Add redult and delete student from lis
+
+    string category_name = categoryController.GetCategotyByID(current_student.Category).Name;
+
+
+    studentController.ResultsList.Add(new_result);
+
+    string new_file_name =
+        current_student.Name + " " + current_student.Surname
+        + DateTime.Now.ToString(" dd MMM yyy HH-mm")
+        + ".txt";
+
+    FileStream fileStream = new FileStream(
+        students_result_path + new_file_name, FileMode.Create);
+    fileStream.Close();
+
+    using (StreamWriter sw = new(students_result_path + new_file_name))
+    {
+        sw.WriteLine(Message.GetResultsText(new_result, category_name));
+    }
+
+    Message.ExamFinised(new_result,category_name);
+
+    studentController.DeleteByID(current_student.ID);
+
 }
 
 
@@ -492,10 +528,18 @@ void _create_default_neccessary_files()
         FileStream fileStream = new FileStream(main_path + category_path, FileMode.Create);
         fileStream.Close();
     }
+
+    if (!File.Exists(main_path + results_path))
+    {
+        FileStream fileStream = new FileStream(main_path + results_path, FileMode.Create);
+        fileStream.Close();
+    }
 }
 
 void Quit()
 {
     FileServices<Student>.SaveData(studentController.StudentList.ToList(), main_path + student_path);
     FileServices<Category>.SaveData(categoryController.CategoriesList.ToList(), main_path + category_path);
+    FileServices<Result>.SaveData(studentController.ResultsList.ToList(), main_path + results_path);
+
 }

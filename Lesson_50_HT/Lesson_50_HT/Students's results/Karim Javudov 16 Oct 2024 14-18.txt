@@ -1,0 +1,14 @@
+Student info: 
+	Name: Karim
+	Surname: Javudov
+	Login: karim@gmai.com
+
+Exam info:
+Subject: IT
+Finished in 10/16/2024 2:18:23 PM
+Right answers: 2
+Wrong answers: 2
+Skipped questions: 0
+============================
+Your overall score: 50 / 100
+Exam passed: Yes

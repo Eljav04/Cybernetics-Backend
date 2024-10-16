@@ -31,7 +31,7 @@ namespace Lesson_50_HT.Model
             int category_id
             )
         {
-            ID = AutoIncrement.GetAdminID();
+            ID = AutoIncrement.GetStudentID();
             Name = name;
             Surname = surname;
             Login = login;
