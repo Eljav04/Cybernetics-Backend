@@ -18,5 +18,6 @@ namespace Lesson_50_HT.Services.Patterns
 
         public readonly static Regex RE_numeric = new Regex(@"^[0-9]+$");
 
+        public readonly static Regex RE_null = new Regex(@"^[\s]+$");
     }
 }

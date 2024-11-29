@@ -31,9 +31,5 @@ namespace Lesson_50_HT.Services.RandomGenerator
         }
     }
 
-
-
-
-
 }
 

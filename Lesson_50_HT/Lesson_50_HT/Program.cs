@@ -234,7 +234,7 @@ void AddCategoryFunc()
     Console.Write("Enter new category name: ");
     string? category = Console.ReadLine();
 
-    if (category != "") {
+    if (category != "" && !Patterns.RE_null.IsMatch(category)) {
         categoryController.Add(new Category(category));
         Message.NewCategoryAdded();
     }

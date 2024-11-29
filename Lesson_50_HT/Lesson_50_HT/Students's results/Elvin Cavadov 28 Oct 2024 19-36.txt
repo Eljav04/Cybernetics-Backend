@@ -1,0 +1,14 @@
+Student info: 
+	Name: Elvin
+	Surname: Cavadov
+	Login: elvin@mail.com
+
+Exam info:
+Subject: IT
+Finished in 10/28/2024 7:36:14 PM
+Right answers: 1
+Wrong answers: 2
+Skipped questions: 0
+============================
+Your overall score: 33 / 100
+Exam passed: No
