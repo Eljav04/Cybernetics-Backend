@@ -8,7 +8,7 @@ namespace Lesson_54_HT.Services.Messages
 {
     public static class Errors
     {
-        public static void ShowError(string errorText)
+        private static void ShowError(string errorText)
         {
             Console.Clear();
             Console.WriteLine(errorText);
@@ -16,29 +16,33 @@ namespace Lesson_54_HT.Services.Messages
             Console.Clear();
         }
 
-        
+        private static Dictionary<string, string> ErrorCodes = new()
+        {
+                {"tryAgain_txt", "\nPlease try again!"},
+
+                {"error10",  "You chose nonexistent option" },
+
+                {"error100",  "ID is not correct" },
+                {"error101",  "Name is not correct" },
+                {"error102",  "Surname is not correct" },
+                {"error104",  "Email is not correct" },
+                {"error105",  "Website is not correct" },
+
+                {"error200",  "Can not properly connect to database" },
+                {"error300",  "Nothing could be found for the entered value" },
+
+                {"error400",  "You choose nonaccessable ID" }
+
+            };
+
         // Show mistake error and interrupt implementing a process
 
 
-        public static void AddContactError(int error_code)
+        public static void ShowErrorByErrorCode(int error_code)
         {
 
-            Dictionary<string, string> ErrorByCode = new()
-            {
-                {"tryAgain_txt", "\nPlease try again!"},
-
-                {"error100",  "Name or phone number can't be null" },
-                {"error101",  "Name is not correct" },
-                {"error102",  "Surname is not correct" },
-                {"error103",  "Phone number is not correct" },
-                {"error104",  "Email is not correct" },
-                {"error105",  "Website or phone number can't be nul" },
-
-                {"error200",  "Can not properly connect to database" }
-            };
-
-            string errorText = ErrorByCode[$"error{error_code}"]
-                             + ErrorByCode[$"tryAgain_txt"];
+            string errorText = ErrorCodes[$"error{error_code}"]
+                             + ErrorCodes[$"tryAgain_txt"];
             ShowError(errorText);
 
         }

@@ -32,45 +32,9 @@ namespace Lesson_54_HT.Services.Messages
             Console.ReadKey();
         }
 
-        public static void NewCategoryAdded()
+        public static void ContactDeleted()
         {
-            string messageText = $"New category added successfully! \n" +
-                "Push any key to continue...";
-            Console.Clear();
-            ShowMessage(messageText);
-            Console.ReadKey();
-        }
-
-        public static void NewQuestionAdded()
-        {
-            string messageText = $"New question added successfully! \n" +
-                "Push any key to continue...";
-            Console.Clear();
-            ShowMessage(messageText);
-            Console.ReadKey();
-        }
-
-        public static void StudentDeleted()
-        {
-            string messageText = $"Student deleted successfully! \n" +
-                "Push any key to continue...";
-            Console.Clear();
-            ShowMessage(messageText);
-            Console.ReadKey();
-        }
-
-        public static void CategoryDeleted()
-        {
-            string messageText = $"Category deleted successfully! \n" +
-                "Push any key to continue...";
-            Console.Clear();
-            ShowMessage(messageText);
-            Console.ReadKey();
-        }
-
-        public static void QuestiionDeleted()
-        {
-            string messageText = $"Question deleted successfully! \n" +
+            string messageText = $"Contact deleted successfully! \n" +
                 "Push any key to continue...";
             Console.Clear();
             ShowMessage(messageText);
@@ -83,17 +47,6 @@ namespace Lesson_54_HT.Services.Messages
             ShowMessage(errorText);
         }
 
-        public static void ExamStarted()
-        {
-            string errorText = "Before beginning the exam you must read and confirm all rules.\n" +
-            "The exam will last 60 minutes. Every question has a bunch of answers. You should choose ONLY ONE.\n" +
-            "For start just push enter...";
-            Console.Clear();
-            ShowMessage(errorText);
-            Console.ReadKey();
-        }
-
-        
-
+   
     }
 }
