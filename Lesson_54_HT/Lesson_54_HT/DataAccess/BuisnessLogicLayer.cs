@@ -15,12 +15,90 @@ namespace Lesson_54_HT.DataAccess
             DLL = new();
 		}
 
+        // Profiles functions
+
+        public int AddProfile(Profile profile)
+        {
+            if (profile.Name is null || profile.Name.Equals("")
+                || profile.PhoneNumber is null || profile.PhoneNumber.Equals("")
+                || profile.Password is null || profile.Password.Equals(""))
+            {
+                return 150;
+            }
+
+
+            if (!Patterns.RE_name.IsMatch(profile.Name))
+            {
+                return 101;
+            }
+
+            if (profile.Surname is not null
+                && profile.Surname != ""
+                && !Patterns.RE_surname.IsMatch(profile.Surname))
+            {
+                return 102;
+            }
+
+            if (!Patterns.RE_phone_number.IsMatch(profile.PhoneNumber))
+            {
+                return 103;
+            }
+
+
+            if (profile.Email is not null
+                && profile.Email != ""
+                && !Patterns.RE_email.IsMatch(profile.Email))
+            {
+                return 104;
+            }
+
+            if (!Patterns.RE_password_hasMinimum8Chars.IsMatch(profile.Password))
+            {
+                return 110;
+            }
+            if (!Patterns.RE_password_hasNumber.IsMatch(profile.Password))
+            {
+                return 111;
+            }
+            if (!Patterns.RE_password_hasUpperChar.IsMatch(profile.Password))
+            {
+                return 112;
+            }
+
+            return DLL.AddProfile(profile);
+
+        }
+
+        public (Profile Profile, int ErrorCode) GetProfle(string login)
+        {
+            if (!Patterns.RE_phone_number.IsMatch(login))
+            {
+                if (!Patterns.RE_email.IsMatch(login))
+                {
+                    return (null, 502);
+                }
+            }
+
+            int CheckError = DLL.CheckIfExistProfile(login, login);
+            if (CheckError.Equals(200))
+            {
+                return (null, 200);
+            }
+
+            if (CheckError < 1)
+            {
+                return (null, 501);
+            }
+
+            return DLL.GetProfile(login);
+        }
+
         // Add Functions
-		public int AddContact(Contacts contact)
+        public int AddContact(Contacts contact, int profile_id)
 		{
 			if (contact.Name is null || contact.Name.Equals(""))
 			{
-				return 100;
+				return 149;
 			}
 
 			if (!Patterns.RE_name.IsMatch(contact.Name))
@@ -62,20 +140,19 @@ namespace Lesson_54_HT.DataAccess
                 return 105;
             }
 
-            return DLL.AddContact(contact);
+            return DLL.AddContact(contact, profile_id);
 
 		}
 
         // Show and Get Functions
-        public void ShowAllContacts()
+        public void ShowAllContacts(int profile_id)
         {
-            List<Contacts> checkList = DLL.GetAllContacts();
+            List<Contacts> checkList = DLL.GetAllContacts(profile_id);
             checkList.ForEach(c => c.ShowInfo());
         }
 
-
         public (int ErrorCode, List<Contacts> ContactsList)
-            GetContactsBy(string contact_category, string search_parametr)
+            GetContactsBy(string contact_category, string search_parametr, int profile_id)
 		{
             if (contact_category == "ID"
                 && !Patterns.RE_numeric.IsMatch(search_parametr))
@@ -107,7 +184,7 @@ namespace Lesson_54_HT.DataAccess
                 return (105, null);
             }
 
-            List<Contacts>? search_results = DLL.GetAllContactsBy(contact_category, search_parametr);
+            List<Contacts>? search_results = DLL.GetAllContactsBy(contact_category, search_parametr, profile_id);
             if (search_results is null)
             {
                 return (200, null);
@@ -139,59 +216,59 @@ namespace Lesson_54_HT.DataAccess
         // Update Function
         public int UpdateContact(string contact_category, string update_parametr, Contacts update_contact)
         {
-            if (contact_category == "Name"
-                && !Patterns.RE_name.IsMatch(update_parametr))
+            if (contact_category == "Name")
             {
-                return 101;
-            }
-            else
-            {
+                if (!Patterns.RE_name.IsMatch(update_parametr))
+                {
+                    return 101;
+
+                }
                 update_contact.Name = update_parametr;
             }
 
-            if (contact_category == "Surname"
-                && !Patterns.RE_surname.IsMatch(update_parametr))
+            if (contact_category == "Surname")
             {
-                return 102;
-            }
-            else
-            {
+                if (!Patterns.RE_surname.IsMatch(update_parametr))
+                {
+                    return 102;
+
+                }
                 update_contact.Surname = update_parametr;
             }
 
-            if (contact_category == "Email"
-                && !Patterns.RE_email.IsMatch(update_parametr))
+            if (contact_category == "Email")
             {
-                return 104;
-            }
-            else
-            {
+                if (!Patterns.RE_email.IsMatch(update_parametr))
+                {
+                    return 104;
+
+                }
                 update_contact.Email = update_parametr;
             }
 
-            if (contact_category == "Website"
-                && !Uri.IsWellFormedUriString(update_parametr, UriKind.Absolute))
+            if (contact_category == "Website")
             {
-                return 105;
-            }
-            else
-            {
+                if (!Patterns.RE_website.IsMatch(update_parametr))
+                {
+                    return 105;
+
+                }
                 update_contact.Website = update_parametr;
             }
 
-            List<Contacts>? search_results = DLL.GetAllContactsBy(contact_category, update_parametr);
-            if (search_results is null)
+            return DLL.UpdateContact(update_contact);
+        }
+
+        public int UpdateContactNumbers(int contact_id, string old_number, string new_number)
+        {
+            if (!Patterns.RE_phone_number.IsMatch(new_number))
             {
-                return (200, null);
+                return 103;
+
             }
-            else if (search_results.Count < 1)
-            {
-                return (300, null);
-            }
-            else
-            {
-                return (0, search_results);
-            }
+
+            return DLL.UpdateNumber(contact_id, old_number, new_number);
+            
         }
     }
 }

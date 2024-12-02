@@ -25,13 +25,31 @@ namespace Lesson_54_HT.Services.Messages
                 {"error100",  "ID is not correct" },
                 {"error101",  "Name is not correct" },
                 {"error102",  "Surname is not correct" },
+                {"error103",  "Phone number is not correct" },
                 {"error104",  "Email is not correct" },
                 {"error105",  "Website is not correct" },
+
+                {"error149",  "Name can't be null" },
+                {"error150",  "Name, Phone number or Password can't be null" },
+
+
+                {"error110",  "Passwors must have minimum 8 characters" },
+                {"error111",  "Password must have at least 1 number" },
+                {"error112",  "Passwoed must have at least 1 UpperCase character" },
+
 
                 {"error200",  "Can not properly connect to database" },
                 {"error300",  "Nothing could be found for the entered value" },
 
-                {"error400",  "You choose nonaccessable ID" }
+
+                {"error400",  "You choose nonaccessable ID" },
+
+                {"error500",  "This profle already exist!" },
+                {"error501",  "This profle can not found!" },
+                {"error502",  "Login or email is not correct!" },
+
+
+
 
             };
 

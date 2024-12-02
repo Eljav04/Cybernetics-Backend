@@ -41,12 +41,30 @@ namespace Lesson_54_HT.Services.Messages
             Console.ReadKey();
         }
 
+        public static void ContactUpdated()
+        {
+            string messageText = $"Contact updated successfully! \n" +
+                "Push any key to continue...";
+            Console.Clear();
+            ShowMessage(messageText);
+            Console.ReadKey();
+        }
+
+
         public static void MistakeError()
         {
             string errorText = "You have a mistake! Please try again";
             ShowMessage(errorText);
         }
 
-   
+        public static void SignUp()
+        {
+            Console.Clear();
+            string errorText = "You successfully signed up your profile";
+            ShowMessage(errorText);
+            Console.ReadLine();
+        }
+
+
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Lesson_54_HT.Model;
 using Lesson_54_HT.DataAccess;
 using Lesson_54_HT.Services.Patterns;
+using Lesson_54_HT.Services.Messages;
 
 namespace Lesson_54_HT.Controller
 {
@@ -12,8 +13,9 @@ namespace Lesson_54_HT.Controller
             BLL = new();
 		}
 
-		public int AddContact()
+		public int AddContact(int profile_id)
 		{
+            Console.Clear();
 			Console.WriteLine("Enter name: ");
 			string? name = Console.ReadLine();
 
@@ -52,16 +54,19 @@ namespace Lesson_54_HT.Controller
                 Website = website
             };
 
-            return BLL.AddContact(contact);
+            return BLL.AddContact(contact, profile_id);
         }
 
-        public void ShowAllContacts()
+        public void ShowAllContacts(int profile_id)
         {
-            BLL.ShowAllContacts();
+            Console.Clear();
+            BLL.ShowAllContacts(profile_id);
+            Message.EndOfProcess();
         }
 
-        private (int ErrorCode, List<Contacts> ContactsList) GetContactsBy()
+        private (int ErrorCode, List<Contacts> ContactsList) GetContactsBy(int profile_id)
         {
+            Console.Clear();
             Console.WriteLine("Show contacts by:\n" +
                 "\t1. ID\n" +
                 "\t2. Name\n" +
@@ -77,23 +82,23 @@ namespace Lesson_54_HT.Controller
             {
                 case "1":
                     Console.Write("Enter ID: ");
-                    SearchResults = BLL.GetContactsBy("ID", Console.ReadLine());
+                    SearchResults = BLL.GetContactsBy("ID", Console.ReadLine(), profile_id);
                     break;
                 case "2":
                     Console.Write("Enter Name: ");
-                    SearchResults = BLL.GetContactsBy("Name", Console.ReadLine());
+                    SearchResults = BLL.GetContactsBy("Name", Console.ReadLine(), profile_id);
                     break;
                 case "3":
                     Console.Write("Enter Surname: ");
-                    SearchResults = BLL.GetContactsBy("Surname", Console.ReadLine());
+                    SearchResults = BLL.GetContactsBy("Surname", Console.ReadLine(), profile_id);
                     break;
                 case "4":
                     Console.Write("Enter Email: ");
-                    SearchResults = BLL.GetContactsBy("Email", Console.ReadLine());
+                    SearchResults = BLL.GetContactsBy("Email", Console.ReadLine(), profile_id);
                     break;
                 case "5":
                     Console.Write("Enter Website: ");
-                    SearchResults = BLL.GetContactsBy("Website", Console.ReadLine());
+                    SearchResults = BLL.GetContactsBy("Website", Console.ReadLine(), profile_id);
                     break;
 
                 default:
@@ -104,23 +109,24 @@ namespace Lesson_54_HT.Controller
 
         }
 
-        public int ShowContactsBy()
+        public int ShowContactsBy(int profile_id)
         {
             (int ErrorCode, List<Contacts> ContactsList) SearchResults;
-            SearchResults = GetContactsBy();
+            SearchResults = GetContactsBy(profile_id);
 
             if (SearchResults.ErrorCode.Equals(0))
             {
                 Console.Clear();
                 SearchResults.ContactsList.ForEach(c => c.ShowInfo());
+                Message.EndOfProcess();
             }
             return SearchResults.ErrorCode;
         }
 
-        public int DeleteContact()
+        public int DeleteContact(int profile_id)
         {
             (int ErrorCode, List<Contacts> ContactsList) SearchResults;
-            SearchResults = GetContactsBy();
+            SearchResults = GetContactsBy(profile_id);
 
             if (SearchResults.ErrorCode.Equals(0))
             {
@@ -142,10 +148,10 @@ namespace Lesson_54_HT.Controller
             return SearchResults.ErrorCode;
         }
 
-        public int UpdateContact()
+        public int UpdateContact(int profile_id)
         {
             (int ErrorCode, List<Contacts> ContactsList) SearchResults;
-            SearchResults = GetContactsBy();
+            SearchResults = GetContactsBy(profile_id);
 
             if (SearchResults.ErrorCode.Equals(0))
             {
@@ -174,6 +180,8 @@ namespace Lesson_54_HT.Controller
                     LastOrDefault();
 
                 Console.Clear();
+
+                update_contact.ShowInfo();
                 Console.WriteLine("What do you want to update:\n" +
                 "\t1. Name\n" +
                 "\t2. Surname\n" +
@@ -191,6 +199,36 @@ namespace Lesson_54_HT.Controller
                     case "2":
                         Console.Write("Enter new Surname: ");
                         return BLL.UpdateContact("Surname", Console.ReadLine(), update_contact);
+                    case "3":
+                        int index = 1;
+                        update_contact.PhoneNumbers.ForEach(n => Console.WriteLine($"{index++} - {n}"));
+                        Console.Write("Choose index of phone number: ");
+                        dynamic update_number_i;
+                        update_number_i = Console.ReadLine();
+                        if (!Patterns.RE_numeric.IsMatch(update_number_i))
+                        {
+                            return 10;
+                        }
+
+                        update_number_i = Convert.ToInt32(update_number_i);
+
+                        if(update_number_i > update_contact.PhoneNumbers.Count)
+                        {
+                            return 10;
+                        }
+                        else if(update_number_i < 1)
+                        {
+                            return 10;
+                        }
+
+                        Console.Write("Enter new Phone number: ");
+                        return BLL.UpdateContactNumbers(
+                            update_contact.ID,
+                            update_contact.PhoneNumbers[update_number_i - 1],
+                            Console.ReadLine());
+
+                     
+
                     case "4":
                         Console.Write("Enter new Email: ");
                         return BLL.UpdateContact("Email", Console.ReadLine(), update_contact);
@@ -200,11 +238,6 @@ namespace Lesson_54_HT.Controller
                     default:
                         return 10;
                 }
-
-
-                return BLL.DeleteContact(
-                        Convert.ToInt32(EnteredValue),
-                        SearchResults.ContactsList);
             }
 
             return SearchResults.ErrorCode;
