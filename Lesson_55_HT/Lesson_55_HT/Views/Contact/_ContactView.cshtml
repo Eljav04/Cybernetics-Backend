@@ -1,0 +1,18 @@
+﻿@model List<Contact>
+
+
+
+@foreach (Contact contact in Model)
+{
+    string img_path = $"~/media/foto{contact.ID}.jpeg";
+
+    <a href="/Contact/Details">
+        <div class="Contact">
+            <img src="@Url.Content(img_path)" alt="">
+            <h4>@contact.Name <br> @contact.Surname</h4>
+            <p>@contact.Location</p>
+        </div>
+    </a>
+}
+
+

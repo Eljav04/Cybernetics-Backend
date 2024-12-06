@@ -1,0 +1,30 @@
+﻿@model List<Contact>
+
+    <div class="ContactDetails_Container">
+        <div class="ContactDetails_ImgBlock">
+            <img src="~/media/foto1.jpeg" alt="">
+        </div>
+        <ul class="ContactDetails_InfoBlock">
+            <li>
+                <p>Name: </p>
+                <h4>@Model[0].Name</h4>
+            </li>
+            <li>
+                <p>Surname: </p>
+                <h4>@Model[0].Surname</h4>
+            </li>
+            <li>
+                <p>Phone number: </p>
+                <h4>@Model[0].PhoneNumber</h4>
+            </li>
+            <li>
+                <p>Email: </p>
+                <h4>@Model[0].Email</h4>
+            </li>
+            <li>
+                <p>Location: </p>
+                <h4>@Model[0].Location</h4>
+            </li>
+
+        </ul>
+    </div>

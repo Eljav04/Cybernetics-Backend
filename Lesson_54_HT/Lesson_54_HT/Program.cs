@@ -8,19 +8,7 @@ ProfileController profileController = new();
 DataLogicLayer DLL = new();
 
 
-
-
-
-Profile profile = new()
-{
-    ID = 1,
-    Name = "elya",
-    PhoneNumber = "3434534",
-};
-
 LaunchProgram();
-
-//open_contactsEditor(profile);
 
 void LaunchProgram()
 {
