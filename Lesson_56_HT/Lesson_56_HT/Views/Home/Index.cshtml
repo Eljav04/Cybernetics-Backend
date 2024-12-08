@@ -1,8 +1,142 @@
-﻿@{
+﻿@model List<City>
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+@section MyLinkCSS {
+    <link rel="stylesheet" href="~/css/main.css" asp-append-version="true" />
+}
+
+<section class="Slider-Section">
+    <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="true">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="~/media/Slider/083018-Cover-Italy-Positano.jpg" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+                <img src="~/media/Slider/Most-Visited-Countries-in-the-World-1.jpg" class="d-block w-100"
+                     alt="...">
+            </div>
+            <div class="carousel-item">
+                <img src="~/media/Slider/seigantoji-pagoda-japan-shutterstock_189118511_bdc0eb254a.jpeg"
+                     class="d-block w-100" alt="...">
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying"
+                data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying"
+                data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+</section>
+<section class="Info-Section">
+    <h1 class="h1 ">
+        Follow Travello everywhere and open new incredible places around whole the world
+    </h1>
+    <p class="lead">
+        Lorem ipsum dolor sit amet consectetur, adipisicing elit. In similique possimus perspiciatis officia
+        ipsum nesciunt, ullam ipsam blanditiis reiciendis veniam necessitatibus. Vel minima dolor, id modi,
+        fugiat voluptatum natus veniam explicabo qui facilis consectetur sed culpa omnis at porro! Quia
+        aspernatur reprehenderit sit laudantium aliquam modi asperiores officia laborum? Minus.
+    </p>
+</section>
+<section class="Card-Section mt-4">
+    @await Html.PartialAsync("Partials/_HomeCards", Model[0])
+
+
+    <div class="card" style="width: 18rem;">
+        <img src="./media/Cars-Images/dubai-travel_4x3.jpg.avif" alt="...">
+        <div class="card-body">
+            <h5 class="card-title">Dubai</h5>
+            <p class="card-text">
+                Some quick example text to build on the card title and make up the bulk of the
+                card's content.
+            </p>
+            <a href="./dubai.html" class="btn btn-primary">Start your trip</a>
+        </div>
+    </div>
+    <div class="card" style="width: 18rem;">
+        <img src="./media/Cars-Images/eiffel-tower-in-paris-151-medium.jpg" alt="...">
+        <div class="card-body">
+            <h5 class="card-title">Paris</h5>
+            <p class="card-text">
+                Some quick example text to build on the card title and make up the bulk of the
+                card's content.
+            </p>
+            <a href="#" class="btn btn-primary">Start your trip</a>
+        </div>
+    </div>
+    <div class="card" style="width: 18rem;">
+        <img src="./media/Cars-Images/images-2.jpeg" alt="...">
+        <div class="card-body">
+            <h5 class="card-title">Mexico</h5>
+            <p class="card-text">
+                Some quick example text to build on the card title and make up the bulk of the
+                card's content.
+            </p>
+            <a href="#" class="btn btn-primary">Start your trip</a>
+        </div>
+    </div>
+    <div class="card" style="width: 18rem;">
+        <img src="./media/Cars-Images/images.jpeg" alt="...">
+        <div class="card-body">
+            <h5 class="card-title">New Dehli</h5>
+            <p class="card-text">
+                Some quick example text to build on the card title and make up the bulk of the
+                card's content.
+            </p>
+            <a href="#" class="btn btn-primary">Start your trip</a>
+        </div>
+    </div>
+    <div class="card" style="width: 18rem;">
+        <img src="./media/Cars-Images/madrid-travel-guide.jpg.webp" alt="...">
+        <div class="card-body">
+            <h5 class="card-title">Madrid</h5>
+            <p class="card-text">
+                Some quick example text to build on the card title and make up the bulk of the
+                card's content.
+            </p>
+            <a href="#" class="btn btn-primary">Start your trip</a>
+        </div>
+    </div>
+    <div class="card" style="width: 18rem;">
+        <img src="./media/Cars-Images/New_york_times_square-terabass.jpg" alt="...">
+        <div class="card-body">
+            <h5 class="card-title">New York</h5>
+            <p class="card-text">
+                Some quick example text to build on the card title and make up the bulk of the
+                card's content.
+            </p>
+            <a href="#" class="btn btn-primary">Start your trip</a>
+        </div>
+    </div>
+    <div class="card" style="width: 18rem;">
+        <img src="./media/Cars-Images/TAL-koh-phi-phi-PLACESTHAILAND1023-09b9d347b3cd4844b4ae19e4e06a9a6d.jpg"
+             alt="...">
+        <div class="card-body">
+            <h5 class="card-title">Tailand</h5>
+            <p class="card-text">
+                Some quick example text to build on the card title and make up the bulk of the
+                card's content.
+            </p>
+            <a href="#" class="btn btn-primary">Start your trip</a>
+        </div>
+    </div>
+    <div class="card" style="width: 18rem;">
+        <img src="./media/Cars-Images/untitled-design-55.png" alt="...">
+        <div class="card-body">
+            <h5 class="card-title">Bali</h5>
+            <p class="card-text">
+                Some quick example text to build on the card title and make up the bulk of the
+                card's content.
+            </p>
+            <a href="#" class="btn btn-primary">Start your trip</a>
+        </div>
+    </div>
+</section>

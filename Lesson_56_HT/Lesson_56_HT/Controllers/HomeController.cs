@@ -1,6 +1,7 @@
 using Lesson_56_HT.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using Lesson_56_HT.Repositories;
 
 namespace Lesson_56_HT.Controllers
 {
@@ -15,10 +16,11 @@ namespace Lesson_56_HT.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            CityRepository cityRepository = new();
+            return View(cityRepository.CityList);
         }
 
-        public IActionResult Privacy()
+        public IActionResult Visa()
         {
             return View();
         }

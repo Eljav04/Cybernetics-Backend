@@ -1,0 +1,12 @@
+﻿@model City
+
+<div class="card" style="width: 18rem;">
+    <img src="@Url.Content($"~/media/{Model.Name}/card_img.jpeg")" class="card-img-top" alt="...">
+    <div class="card-body">
+        <h5 class="card-title">@Model.Name</h5>
+        <p class="card-text">
+            @Model.Description
+        </p>
+        <a href="#" class="btn btn-primary">Start your trip</a>
+    </div>
+</div>
