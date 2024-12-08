@@ -1,1 +1,5 @@
+<<<<<<< Updated upstream
 [{"ID":1,"QuestionList":[{"ID":2,"QuestionText":"What means letter \u0022L\u0022 in LAN?","Answers":["Local","Length","List"],"RightAnswerID":0},{"ID":3,"QuestionText":"How many pluses have C\u002B\u002B?","Answers":["One ","Two","Three"],"RightAnswerID":1},{"ID":1,"QuestionText":"How much bits has 1 byte","Answers":["16 bit","8 bit","10 bit"],"RightAnswerID":1}],"Name":"IT"},{"ID":4,"QuestionList":[],"Name":"It"},{"ID":5,"QuestionList":[],"Name":" H"}]
+=======
+[{"ID":1,"QuestionList":[{"ID":1,"QuestionText":"How many languages do you speak?","Answers":["none","one","infinity"],"RightAnswerID":2},{"ID":2,"QuestionText":"How much bits has 1 byte","Answers":["16 bit","8 bit","10 bit"],"RightAnswerID":1},{"ID":3,"QuestionText":"What kind of valuables int can include?","Answers":["12","fg","67.56"],"RightAnswerID":0},{"ID":4,"QuestionText":"How many pluses have C\u002B\u002B?","Answers":["One ","Two","Three"],"RightAnswerID":1},{"ID":5,"QuestionText":"What means letter \u0022L\u0022 in LAN?","Answers":["Local","Length","List"],"RightAnswerID":0}],"Name":"IT"},{"ID":2,"QuestionList":[],"Name":"Math"}]
+>>>>>>> Stashed changes

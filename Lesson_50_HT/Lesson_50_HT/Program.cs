@@ -93,6 +93,11 @@ void SignInFunc()
         }
     }
 
+    Console.Clear();
+    Console.WriteLine("U have a mistake");
+    Console.ReadLine();
+
+
     Student? able_student = studentController.GetStudentByLogin(inputLogin);
     if (able_student is not null)
     {
