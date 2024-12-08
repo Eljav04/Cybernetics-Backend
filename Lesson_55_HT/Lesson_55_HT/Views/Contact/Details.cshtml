@@ -1,30 +1,42 @@
-﻿@model List<Contact>
+﻿@section MyCss{
+    <link rel="stylesheet" href="~/css/main.css" type="text/css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Parkinsans:wght@300..800&display=swap" rel="stylesheet">
+}
 
-    <div class="ContactDetails_Container">
-        <div class="ContactDetails_ImgBlock">
-            <img src="~/media/foto1.jpeg" alt="">
-        </div>
-        <ul class="ContactDetails_InfoBlock">
-            <li>
-                <p>Name: </p>
-                <h4>@Model[0].Name</h4>
-            </li>
-            <li>
-                <p>Surname: </p>
-                <h4>@Model[0].Surname</h4>
-            </li>
-            <li>
-                <p>Phone number: </p>
-                <h4>@Model[0].PhoneNumber</h4>
-            </li>
-            <li>
-                <p>Email: </p>
-                <h4>@Model[0].Email</h4>
-            </li>
-            <li>
-                <p>Location: </p>
-                <h4>@Model[0].Location</h4>
-            </li>
+@{
+    string img_path = $"~/media/foto{@Model.ID}.jpeg";
+}
 
-        </ul>
+
+@model Contact
+
+<div class="ContactDetails_Container">
+    <div class="ContactDetails_ImgBlock">
+        <img src=@Url.Content(img_path) alt="">
     </div>
+    <ul class="ContactDetails_InfoBlock">
+        <li>
+            <p>Name: </p>
+            <h4>@Model.Name</h4>
+        </li>
+        <li>
+            <p>Surname: </p>
+            <h4>@Model.Surname</h4>
+        </li>
+        <li>
+            <p>Phone number: </p>
+            <h4>@Model.PhoneNumber</h4>
+        </li>
+        <li>
+            <p>Email: </p>
+            <h4>@Model.Email</h4>
+        </li>
+        <li>
+            <p>Location: </p>
+            <h4>@Model.Location</h4>
+        </li>
+
+    </ul>
+</div>
