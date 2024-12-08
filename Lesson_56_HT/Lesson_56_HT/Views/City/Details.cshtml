@@ -1,0 +1,89 @@
+﻿@model City
+
+@{
+    ViewData["Title"] = @Model.Name;
+}
+
+@section MyLinkCSS {
+    <link rel="stylesheet" href="~/css/city.css" asp-append-version="true" />
+}
+
+<section class="Dream-Section">
+    <p class="Dream-Section-Header h1  text-uppercase text-center ">
+        Make you dream comes true
+    </p>
+</section>
+
+<section class="Choose-Section">
+    <p class="h1 mt-4 text-capitalize text-center ">
+        Choose @Model.Name for your next trip
+    </p>
+    <p class="lead px-5">
+        @Model.Description
+    </p>
+</section>
+
+<section class="Why-Section">
+    <p class="h2 mt-4 text-capitalize text-center ">
+        Why @Model.Name?
+    </p>
+    <div class="Why-Section-Container">
+
+
+        <img class="Why-Section-Img" src="@Url.Content($"~/media/{Model.Name}/info_img.jpeg")" alt="">
+
+        <div class="accordion" id="accordionExample">
+        @foreach(KeyValuePair<string, string> keyValue in Model.Advantages)
+        {
+            @await Html.PartialAsync("Partials/_CityAdvantagesSection", keyValue)    
+        }
+        </div>
+        
+    </div>
+</section>
+
+<section class="mt-4 px-4">
+    <form action="" method="post">
+        <p class="text-center fw-bold fs-4 pt-4">
+            We will contact you as soon as possible
+        </p>
+        <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Full name</label>
+            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="John Johnson">
+        </div>
+        <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Phone number</label>
+            <input type="text" class="form-control" id="exampleFormControlInput1"
+                   placeholder="+994 50 404 40 40">
+        </div>
+
+        <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Email address</label>
+            <input type="email" class="form-control" id="exampleFormControlInput1"
+                   placeholder="name@example.com">
+        </div>
+        <div class="mb-3">
+            <label for="exampleFormControlTextarea1" class="form-label">
+                Mention your budjet and we help you with
+                your choose
+            </label>
+            <input type="number" class="form-control" id="exampleFormControlInput1" placeholder="1500$">
+        </div>
+
+        <input class="btn btn-primary mt-2" type="submit" value="Submit">
+
+    </form>
+</section>
+
+
+
+<style>
+
+    .Dream-Section {
+        height: 50vh;
+        background: url(@Url.Content($"~/media/{Model.Name}/bg_img.jpeg"));
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center 20%;
+    }
+</style>

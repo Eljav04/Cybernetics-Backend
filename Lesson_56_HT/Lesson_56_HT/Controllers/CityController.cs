@@ -1,12 +1,23 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Lesson_56_HT.Repositories;
+using Microsoft.AspNetCore.Mvc;
+using Lesson_56_HT.Models;
 
 namespace Lesson_56_HT.Controllers
 {
     public class CityController : Controller
     {
-        public IActionResult Index()
+        public IActionResult Details(int id)
         {
-            return View();
+            CityRepository cityRepository = new();
+            City? result = cityRepository.GetCityById(id);
+
+            if (result is null) 
+            { 
+                return NotFound();
+            }
+
+
+            return View(result);
         }
     }
 }

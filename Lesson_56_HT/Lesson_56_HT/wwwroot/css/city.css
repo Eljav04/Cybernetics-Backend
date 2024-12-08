@@ -14,15 +14,6 @@ section:not(:has(.Dream-Section-Header)) {
     object-fit: cover;
 }
 
-.Dream-Section {
-    height: 50vh;
-    background: url(./media/Dubai/output-onlinepngtools.png);
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center 20%;
-
-}
-
 
 .Dream-Section-Header {
     border-radius: 10px;
