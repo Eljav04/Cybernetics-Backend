@@ -1,8 +1,31 @@
-﻿@model City
+﻿@using Lesson_56_HT.Enums;
 
-<div class="card" style="width: 18rem;">
+@model City
+
+@{
+    string border_color;
+
+    switch (Model.WorldPartName)
+    {
+        case WorldPart.Asia:
+            border_color = "red";
+            break;
+        case WorldPart.America:
+            border_color = "green";
+            break;
+        case WorldPart.Europe:
+            border_color = "blue";
+            break;
+        default:
+            border_color = "red";
+            break;
+    }
+
+        }
+
+<div class="card" style="width: 18rem; ">
     <img src="@Url.Content($"~/media/{Model.Name}/card_img.jpeg")" class="card-img-top" alt="...">
-    <div class="card-body">
+    <div class="card-body" style="box-shadow: 0px 0px 50px 2px @border_color">
         <h5 class="card-title">@Model.Name</h5>
         <p class="card-text">
             @Model.Description

@@ -1,4 +1,5 @@
-﻿using Lesson_56_HT.Models;
+﻿using Lesson_56_HT.Enums;
+using Lesson_56_HT.Models;
 
 namespace Lesson_56_HT.Repositories
 {
@@ -10,6 +11,7 @@ namespace Lesson_56_HT.Repositories
             {
                 new City(1, "Dubai", 
                 "Dubai’s unique blend of modern luxury, rich cultural heritage, and diverse attractions make it a top choice for travelers seeking a memorable and exciting trip.",
+                WorldPart.Asia,
                 new()
                 {
                     {"World-Class Entertainment and Leisure", "From desert safaris and dune bashing to indoor skiing and skydiving, Dubai offers a\r\n                                plethora of activities for thrill-seekers. The Dubai Fountain, with its choreographed\r\n                                water shows set to music, is a spectacle not to be missed." },
@@ -19,6 +21,7 @@ namespace Lesson_56_HT.Repositories
                 ),
                 new City(2, "Berlin",
                 "Berlin, the capital of Germany, is a vibrant city known for its historical landmarks, modern culture, and artistic flair. With a unique mix of past and present, Berlin offers visitors a fascinating experience.",
+                WorldPart.Europe,
                 new()
                 {
                     {"Historical Landmarks", "Berlin is home to iconic historical sites like the Brandenburg Gate, the Berlin Wall, and Checkpoint Charlie. Visitors can explore the remnants of the Berlin Wall at the East Side Gallery or visit the Reichstag building for a glimpse into Germany’s political history."},
@@ -29,6 +32,7 @@ namespace Lesson_56_HT.Repositories
 
                 new City(3, "Paris",
                 "Paris, the City of Light, is renowned for its romance, elegance, and timeless beauty. It’s a global hub for art, fashion, gastronomy, and culture.",
+                WorldPart.Europe,
                 new()
                 {
                     {"Iconic Landmarks", "Paris is home to world-famous landmarks such as the Eiffel Tower, Notre-Dame Cathedral, and the Louvre Museum. Visitors can enjoy breathtaking views of the city from Montmartre or a serene cruise along the Seine River."},
@@ -39,6 +43,7 @@ namespace Lesson_56_HT.Repositories
 
                 new City(4, "Mexico City",
                 "Mexico City, the vibrant capital of Mexico, blends rich history, colorful traditions, and a lively contemporary culture. It’s a city full of surprises and charm.",
+                WorldPart.America,
                 new()
                 {
                     {"Historical and Cultural Sites", "Mexico City is rich in history, with landmarks like the ancient ruins of Teotihuacan and the historic center’s Zócalo Square. The National Museum of Anthropology offers fascinating insights into Mexico’s heritage."},
@@ -49,6 +54,7 @@ namespace Lesson_56_HT.Repositories
 
                 new City(5, "New Delhi",
                 "New Delhi, the capital of India, is a bustling metropolis that seamlessly blends ancient history with modern living. It’s a city full of contrasts and endless exploration opportunities.",
+                WorldPart.Asia,
                 new()
                 {
                     {"Historical Monuments", "New Delhi is home to iconic landmarks like the Red Fort, Humayun’s Tomb, and India Gate. Visitors can explore the historic Qutub Minar complex or stroll through the serene Lodhi Gardens."},
@@ -59,6 +65,7 @@ namespace Lesson_56_HT.Repositories
 
                 new City(6, "Madrid",
                 "Madrid, the capital of Spain, is a city known for its vibrant energy, artistic treasures, and lively atmosphere. It’s a destination that combines tradition with modernity.",
+                WorldPart.Europe,
                 new()
                 {
                     {"World-Class Museums", "Madrid is home to the Golden Triangle of Art, which includes the Prado Museum, Reina Sofia Museum, and Thyssen-Bornemisza Museum. These institutions house masterpieces by artists like Velázquez, Goya, and Picasso."},
@@ -69,6 +76,7 @@ namespace Lesson_56_HT.Repositories
 
                 new City(7, "New York",
                 "New York City, the Big Apple, is a global hub for culture, business, and entertainment. It’s a city that never sleeps and offers something for everyone.",
+                WorldPart.America,
                 new()
                 {
                     {"Iconic Landmarks", "New York City is famous for landmarks like the Statue of Liberty, Times Square, and Central Park. Visitors can also enjoy breathtaking views from the Empire State Building or One World Observatory."},
@@ -79,6 +87,7 @@ namespace Lesson_56_HT.Repositories
 
                 new City(8, "Thailand",
                 "Thailand is a tropical paradise known for its stunning beaches, vibrant culture, and warm hospitality. It’s a dream destination for travelers seeking beauty and adventure.",
+                WorldPart.Asia,
                 new()
                 {
                     {"Pristine Beaches", "Thailand offers idyllic beaches like Phuket, Krabi, and Koh Samui, where visitors can enjoy crystal-clear waters and vibrant coral reefs. These destinations are perfect for snorkeling, diving, and relaxing."},
@@ -89,6 +98,7 @@ namespace Lesson_56_HT.Repositories
 
                 new City(9, "Bali",
                 "Bali, known as the Island of the Gods, is a tropical haven with stunning natural beauty, spiritual culture, and world-class hospitality. It’s a perfect escape for relaxation and adventure.",
+                WorldPart.Asia,
                 new()
                 {
                     {"Breathtaking Landscapes", "Bali is famous for its lush rice terraces, volcanic mountains, and pristine beaches. Visitors can explore the Tegallalang Rice Terraces or hike up Mount Batur for a spectacular sunrise."},
@@ -96,6 +106,8 @@ namespace Lesson_56_HT.Repositories
                     {"Adventure and Relaxation", "Bali offers a mix of thrilling activities like surfing, diving, and jungle trekking. For relaxation, visitors can enjoy world-class spas, beach resorts, and tranquil settings."}
                 }
                 )
+
+          
 
             };
         }

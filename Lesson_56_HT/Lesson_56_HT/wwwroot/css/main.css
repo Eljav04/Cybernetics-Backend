@@ -14,6 +14,8 @@
     padding: 20px 40px;
 }
 
+
+
 .Card-Section {
     display: grid;
     grid-template-columns: repeat(3, auto);

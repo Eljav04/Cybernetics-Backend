@@ -92,6 +92,7 @@ namespace Lesson_55_HT.Repository
                     Email = "kamran@gmail.com",
                     PhoneNumber = "+994509845312"
                 }
+
             };
 
         }
