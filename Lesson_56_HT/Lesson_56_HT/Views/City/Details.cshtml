@@ -1,9 +1,11 @@
 ﻿@using Lesson_56_HT.Models;
+@using Lesson_56_HT.Enums;
+
 @model City
 
 @{
     ViewData["Title"] = @Model.Name;
-    User user = new User();
+    User user = new User() { CityID = Model.ID };
 }
 
 @section MyLinkCSS {
@@ -49,8 +51,8 @@
         <p class="text-center fw-bold fs-4 pt-4">
             We will contact you as soon as possible
         </p>
+        <input type="hidden" asp-for="@user.CityID" />
 
-        <input type="hidden" asp-for="@user.ID" />
         <div class="mb-3">
             <label asp-for="@user.FullName" class="form-label">Full name</label>
             <input type="text" class="form-control" asp-for="@user.FullName" placeholder="John Johnson">
