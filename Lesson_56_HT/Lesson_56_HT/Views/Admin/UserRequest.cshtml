@@ -1,0 +1,34 @@
+﻿@using Lesson_56_HT.Models;
+@using Lesson_56_HT.Enums;
+
+@model List<User>
+
+@{
+    ViewData["Title"] = "User Requests";
+}
+
+@section MyLinkCSS {
+    <link rel="stylesheet" href="~/css/userruquest.css" asp-append-version="true" />
+}
+
+
+<div class="UserRequest_Container">
+    <table>
+        <thead>
+            <tr style="border-top-left-radius: 10px;">
+                <th>City</th>
+                <th>City img</th>
+                <th>Fullname</th>
+                <th>Phone number</th>
+                <th>Email</th>
+                <th>Budjet</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(User user in Model)
+            {
+                @await Html.PartialAsync("Partials/_UserRequestRow", user);
+            }
+        </tbody>
+    </table>
+</div>

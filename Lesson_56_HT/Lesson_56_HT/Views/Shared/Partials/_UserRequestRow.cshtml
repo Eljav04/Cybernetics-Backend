@@ -1,0 +1,18 @@
+﻿@model User
+@using Lesson_56_HT.Repositories;
+
+@{
+    CityRepository cityRepository = new();
+    City? current_city = cityRepository.GetCityById(Model.CityID);
+}
+
+    <tr>
+        <td>@current_city.Name</td>
+        <td class="img_column">
+            <img src="@Url.Content($"~/media/{current_city.Name}/card_img.jpeg")" alt="">
+        </td>
+        <td>@Model.FullName</td>
+        <td>@Model.PhoneNumber</td>
+        <td>@Model.Email</td>
+        <td>@Model.Budjet $</td>
+    </tr>    

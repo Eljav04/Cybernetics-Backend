@@ -22,9 +22,8 @@ namespace Lesson_56_HT.Controllers
 
         [HttpPost]
         public IActionResult GetUserData(User user)
-        {
-            Console.WriteLine(user.FullName);
-            return RedirectToAction("Index", "Home");
+        {            
+            return RedirectToAction("AddUserRequest", "Admin", user);
         }
     }
 }
