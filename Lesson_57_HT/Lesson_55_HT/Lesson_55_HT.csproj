@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(RunConfiguration)' == 'http' " />
+  <ItemGroup>
+    <None Remove="Views\Contact\" />
+    <None Remove="Repository\" />
+    <None Remove="Views\Shared\Partials\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Views\Contact\" />
+    <Folder Include="Repository\" />
+    <Folder Include="Views\Shared\Partials\" />
+  </ItemGroup>
+</Project>
