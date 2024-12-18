@@ -1,0 +1,15 @@
+﻿@model List<User>
+
+
+<ul class="user_list">
+    @foreach (User user in Model)
+    {
+        <li>
+            <p>Fullname: @user.Name @user.Lastname</p>
+            <p>Mail: @user.Email</p>
+            <p>
+                Participate: @(user.Participate == true ? "✓ - Participant" : "X - Not participant")
+            </p>
+        </li>
+    }
+</ul>

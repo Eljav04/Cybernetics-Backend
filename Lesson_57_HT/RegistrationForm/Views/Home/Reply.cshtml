@@ -1,0 +1,24 @@
+﻿@model User
+
+<div class="textContainer">
+    <h4>New year Party Registraion</h4>
+
+    <i>
+        Hey @Model.Name @Model.Lastname,
+        Thanks for your reply!
+    </i>
+
+    <a asp-controller="Home" asp-action="List">Watch list</a>
+    @if (!Model.Participate){
+        <a asp-controller="Home" asp-action="Registration">Back to form</a>
+    }
+
+</div>
+
+
+<style>
+    
+    .textContainer {
+        border: 1px solid @(Model.Participate == true ? "green" : "red");
+    }
+</style>

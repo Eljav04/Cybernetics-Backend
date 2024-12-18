@@ -1,0 +1,60 @@
+﻿@using RegistrationForm.Models;
+@model User
+
+<div id="form">
+
+    <h1>Registraion Form</h1>
+
+    <form method="post" action="Registration" class="form">
+
+        <div class="inputContainer">
+            <label asp-for="Name"></label>
+            <input type="text" asp-for="Name" >
+            <span class="text-danger" asp-validation-for="Name"></span>
+        </div>
+
+        <div class="inputContainer">
+            <label asp-for="Lastname"></label>
+            <input type="text" asp-for="Lastname" >
+            <span class="text-danger" asp-validation-for="Lastname"></span>
+
+        </div>
+
+
+        <div class="inputContainer">
+            <label asp-for="Email"></label>
+            <input type="text" asp-for="Email" >
+            <span class="text-danger" asp-validation-for="Email"></span>
+
+        </div>
+
+        <ul class="form_radioContainer">
+            <span class="text-danger" asp-validation-for="Participate"></span>
+
+            <li>
+                <b>I will:</b>
+            </li>
+            <li>
+                <label for="Participate">
+                    Participate
+                    <input type="radio" asp-for="Participate" id="Participate" value="true">
+                </label>
+
+            </li>
+
+            <li>
+                <label for="NParticipate">
+                    NOT Participate
+                    <input type="radio" asp-for="Participate" id="NParticipate" value="false">
+                </label>
+            </li>
+        </ul>
+
+        <div class="submitContainer">
+            <input type="submit" value="Submit">
+        </div>
+
+
+    </form>
+
+</div>
