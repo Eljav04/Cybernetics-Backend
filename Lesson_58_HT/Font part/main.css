@@ -1,0 +1,140 @@
+* {
+    box-sizing: border-box;
+    font-family: "Montserrat", serif;
+}
+
+ul {
+    list-style-type: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+.Card_Container {
+    margin: 100px auto;
+    width: 90%;
+
+    display: grid;
+    grid-template-columns: repeat(3, 400px);
+
+    gap: 50px;
+    justify-content: center;
+
+}
+
+.Card {
+    padding: 0;
+    list-style-type: none;
+
+    box-shadow: 5px 5px 70px 10px rgba(0, 0, 0, 0.144);
+
+}
+
+.Card_Main {
+    display: flex;
+    flex-direction: column;
+
+    padding: 30px;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.Card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    object-position: center;
+}
+
+.Card h4 {
+    font-size: 30px;
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+
+.Card_Quantity {
+    font-size: 16px;
+    font-weight: 300;
+    color: grey;
+}
+
+.Card_Price {
+    font-size: 40px;
+    font-weight: 500;
+    color: #28C8A4;
+    margin-bottom: 0px;
+}
+
+
+.Card a {
+    display: block;
+
+    background-color: #28C8A4;
+    padding: 20px 0;
+    text-align: center;
+
+    color: #FFFFFF;
+    font-weight: 500;
+    font-size: 22px;
+
+    border: 1.5px solid transparent;
+    transition: all ease 0.4;
+}
+
+.Card a:hover {
+    border-color: #28C8A4;
+    color: #28C8A4;
+
+    background-color: #FFFFFF;
+
+}
+
+/* Details CSS */
+
+.Info_Section {
+    margin: 50px auto 0;
+    width: 80%;
+
+    display: flex;
+}
+
+.Info_Section img {
+    object-fit: cover;
+    width: 100%;
+    height: 400px;
+    object-position: center;
+}
+
+
+.Info_Section h4 {
+    font-size: 35px;
+    font-weight: 500;
+    margin-bottom: 0;
+}
+
+.Info_Details {
+    font-size: 16px;
+    font-weight: 400;
+
+    margin: 10px 0 40px;
+
+}
+
+.Info_Quantity {
+    font-size: 20px;
+    font-weight: 300;
+    color: gray;
+}
+
+.Info_Price {
+    font-size: 35px;
+    font-weight: 500;
+    color: #28C8A4;
+}
+
+.Product_Description {
+    width: 70%;
+    margin: 30px auto;
+}

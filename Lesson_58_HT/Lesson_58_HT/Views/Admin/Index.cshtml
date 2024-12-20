@@ -1,0 +1,26 @@
+﻿@{
+    ViewData["Title"] = "Admin panel";
+}
+
+@section MyCSS {
+    <link href="~/css/admin.css" rel="stylesheet" />
+}
+
+<h3 class="AdminPanel_Info">
+    Admin panel
+</h3>
+<p class="AdminPanel_Choose">
+    Choose the action
+</p>
+
+<div class="Btns_Container">
+    <a asp-controller="Admin" asp-action="Add">
+        Add Product
+    </a>
+    <a asp-controller="Admin" asp-action="Update">
+        Update Product
+    </a>
+    <a asp-controller="Admin" asp-action="Delete">
+        Delete Product
+    </a>
+</div>

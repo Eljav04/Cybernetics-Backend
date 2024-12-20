@@ -1,0 +1,37 @@
+﻿@{
+    ViewData["Title"] = "Admin | Update";
+}
+
+@section MyCSS {
+    <link href="~/css/admin.css" rel="stylesheet" />
+}
+
+<h3 class="AdminPanel_Info">
+        Update product
+    </h3>
+    <p class="AdminPanel_Choose">
+        Enter all required info in the input fileds for update
+    </p>
+
+    <form class="Add_Form" action="Add" method="post">
+
+        <label for="cars">Choose a product:</label>
+        <select name="cars" id="cars" form="carform">
+            <option value="volvo">Volvo</option>
+            <option value="saab">Saab</option>
+            <option value="opel">Opel</option>
+            <option value="audi">Audi</option>
+        </select>
+
+        <label for="name">Product name</label>
+        <input type="text">
+
+        <label for="name">Product quantity</label>
+        <input type="number">
+
+        <label for="name">Product price</label>
+        <input type="text">
+
+        <input class="Submit" type="submit" value="Submit">
+    </form>
+
