@@ -1,6 +1,8 @@
 using Lesson_58_HT.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using Lesson_58_HT.Repository;
+
 
 namespace Lesson_58_HT.Controllers
 {
@@ -18,9 +20,9 @@ namespace Lesson_58_HT.Controllers
             return View();
         }
 
-        public IActionResult Details()
+        public IActionResult Details(int id)
         {
-            return View(new Product());
+            return View(ProductRepository.GetProductByID(id));
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

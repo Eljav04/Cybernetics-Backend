@@ -10,11 +10,11 @@
 
 
  <div class="Info_Section">
-        <img src="/media/example_1.jpg" alt="">
+        <img src="@Url.Content(Model.Image)" alt="">
         <ul>
             <li>
                 <h4>
-                    Sony lopjdferuhf
+                    @Model.Name
                 </h4>
             </li>
             <li>
@@ -25,12 +25,12 @@
             </li>
             <li>
                 <p class="Info_Quantity">
-                    100 pieces left
+                    @Model.Quantity pieces left
                 </p>
             </li>
             <li>
                 <p class="Info_Price">
-                    300 $
+                    @Model.Price $
                 </p>
             </li>
         </ul>

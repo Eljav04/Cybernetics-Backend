@@ -57,12 +57,19 @@ namespace Lesson_58_HT.Controllers
 
         public IActionResult Update()
         {
-            return View();
+            return View(ProductRepository.GetProducts());
         }
 
         public IActionResult Delete()
         {
-            return View();
+            return View(ProductRepository.GetProducts());
+        }
+
+        [HttpPost]
+        public IActionResult Delete(int productId)
+        {
+            ProductRepository.DeleteByID(productId);
+            return RedirectToAction("Index", "Admin");
         }
     }
 }

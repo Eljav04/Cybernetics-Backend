@@ -6,6 +6,7 @@
     <link href="~/css/admin.css" rel="stylesheet" />
 }
 
+
 <h3 class="AdminPanel_Info">
         Update product
     </h3>
@@ -16,15 +17,15 @@
     <form class="Add_Form" action="Add" method="post">
 
         <label for="cars">Choose a product:</label>
-        <select name="cars" id="cars" form="carform">
-            <option value="volvo">Volvo</option>
-            <option value="saab">Saab</option>
-            <option value="opel">Opel</option>
-            <option value="audi">Audi</option>
+        <select name="productId" id="productId">
+            @foreach (Product product in Model)
+            {
+                <option value="@product.ID">@product.Name</option>
+            }
         </select>
 
         <label for="name">Product name</label>
-        <input type="text">
+        <input type="text" id="productName">
 
         <label for="name">Product quantity</label>
         <input type="number">
@@ -34,4 +35,13 @@
 
         <input class="Submit" type="submit" value="Submit">
     </form>
+
+@*<script>
+    function ShowProductInfo() {
+        let number = 12;
+
+        @foreach()
+    }
+
+</script>*@
 

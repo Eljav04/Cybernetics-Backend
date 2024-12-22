@@ -3,73 +3,12 @@
 }
 
 @section MyCSS {
-    <link href="~/css/main.css" rel="stylesheet" />]
+    <link href="~/css/main.css" rel="stylesheet" />
 }
 
 
 <div class="Card_Container">
-    <ul class="Card">
-        <li class="Card_Main">
-            <img src="~/media/example_1.jpg" alt="">
-            <h4>
-                Sony PlayStation 4
-            </h4>
-            <p class="Card_Quantity">
-                100 left
-            </p>
-            <p class="Card_Price">
-                100 $
-            </p>
-
-        </li>
-        <li>
-            <a href="#">
-                Details
-            </a>
-        </li>
-    </ul>
-    <ul class="Card">
-        <li class="Card_Main">
-            <img src="~/media/example_2.jpg" alt="">
-            <h4>
-                Sony PlayStation 4
-            </h4>
-            <p class="Card_Quantity">
-                100 left
-            </p>
-            <p class="Card_Price">
-                100 $
-            </p>
-
-        </li>
-        <li>
-            <a href="#">
-                Details
-            </a>
-        </li>
-    </ul>
-    <ul class="Card">
-        <li class="Card_Main">
-            <img src="~/media/example_3.jpg" alt="">
-            <h4>
-                Sony PlayStation 4
-            </h4>
-            <p class="Card_Quantity">
-                100 left
-            </p>
-            <p class="Card_Price">
-                100 $
-            </p>
-
-        </li>
-        <li>
-            <a href="#">
-                Details
-            </a>
-        </li>
-    </ul>
-
-    @foreach (Product product in ProductRepository.GetProducts){
+    @foreach (Product product in ProductRepository.GetProducts()){
         <ul class="Card">
             <li class="Card_Main">
                 <img src="@Url.Content(product.Image)" alt="">
@@ -86,7 +25,7 @@
 
             </li>
             <li>
-                <a href="#">
+                <a asp-controller="Home" asp-action="Details" asp-route-id="@product.ID">
                     Details
                 </a>
             </li>
