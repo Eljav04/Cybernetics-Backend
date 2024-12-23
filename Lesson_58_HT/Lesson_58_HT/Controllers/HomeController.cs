@@ -2,6 +2,7 @@ using Lesson_58_HT.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using Lesson_58_HT.Repository;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 
 namespace Lesson_58_HT.Controllers
@@ -15,9 +16,18 @@ namespace Lesson_58_HT.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(int? Category)
         {
-            return View();
+            SelectList CategoriesSelectList = new SelectList(CategoryRepository.GetCategories(), "ID", "Name");
+            ViewBag.CategoriesSelect = CategoriesSelectList;
+
+            List<Product> ProductList = ProductRepository.GetProducts();
+
+            if (Category is not null) {
+                ProductList = ProductRepository.GetProductByCategory(Category);
+            }
+
+            return View(ProductList);
         }
 
         public IActionResult Details(int id)

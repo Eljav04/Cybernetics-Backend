@@ -6,6 +6,7 @@
     <link href="~/css/admin.css" rel="stylesheet" />
 }
 
+@model Product
 
 <h3 class="AdminPanel_Info">
         Update product
@@ -14,34 +15,39 @@
         Enter all required info in the input fileds for update
     </p>
 
-    <form class="Add_Form" action="Add" method="post">
+<form class="SelectForm Add_Form" action="Update" method="get">
+    <label>Choose a product:</label>
+    @Html.DropDownList("ProductID", (SelectList)ViewBag.ProductsSelect, "Choose")
 
-        <label for="cars">Choose a product:</label>
-        <select name="productId" id="productId">
-            @foreach (Product product in Model)
-            {
-                <option value="@product.ID">@product.Name</option>
-            }
-        </select>
+</form>
 
-        <label for="name">Product name</label>
-        <input type="text" id="productName">
+<form class="Update_Form Add_Form" action="Update" method="post">
+        <input asp-for="ID" type="hidden">
+        <input asp-for="Image" type="hidden">
 
-        <label for="name">Product quantity</label>
-        <input type="number">
+        <label asp-for="Name">Product name</label>
+        <input asp-for="Name" type="text">
 
-        <label for="name">Product price</label>
-        <input type="text">
+        <label asp-for="Quantity">Product quantity</label>
+        <input asp-for="Quantity">
+
+        <label asp-for="Price">Product price</label>
+        <input asp-for="Price">
+
+    <label>Product category</label>
+
+    @Html.DropDownList("CategoryID", (SelectList)ViewBag.CategoriesSelect)
+
 
         <input class="Submit" type="submit" value="Submit">
     </form>
 
-@*<script>
-    function ShowProductInfo() {
-        let number = 12;
+<script>
+    let selectSection = document.getElementById("ProductID");
+    let form = document.querySelector(".SelectForm");
 
-        @foreach()
-    }
-
-</script>*@
+    selectSection.addEventListener("change", () => {
+        form.submit();
+    })
+</script>
 

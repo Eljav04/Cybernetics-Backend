@@ -1,0 +1,21 @@
+﻿@{
+    ViewData["Title"] = "Log In";
+}
+
+@section MyCSS {
+    <link href="~/css/admin.css" rel="stylesheet" />
+}
+
+@model Admin
+
+<div class="login">
+    <div class="login-triangle"></div>
+
+    <h2 class="login-header">Log in</h2>
+
+    <form asp-action="Login" method="post" class="login-container">
+        <p><input asp-for="Login" placeholder="Login"></p>
+        <p><input asp-for="Password" type="password" placeholder="Password"></p>
+        <p><input type="submit" value="Log in"></p>
+    </form>
+</div>

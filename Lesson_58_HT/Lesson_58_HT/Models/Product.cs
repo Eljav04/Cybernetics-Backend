@@ -9,16 +9,21 @@ namespace Lesson_58_HT.Models
         public int ID { get; set; }
 
         [Required]
-        [Display (Name = "Product")]
+        [StringLength(100, MinimumLength = 2)]
+        [RegularExpression(@"^[a-zA-Z0-9_+#№][a-zA-Z0-9_+#№\s]+$", ErrorMessage = "Product's name is not correct")]
         public string? Name { get; set; }
 
-        [Required]
+        [Required(ErrorMessage ="Quantity is reqired")]
+        [Range(0, 1000000, ErrorMessage = "Quantity must be between 0 and 1.000.000") ]
         public int Quantity { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Price is reqired")]
+        [Range(0.01, 1000000, ErrorMessage = "Quantity must be between 0.01 and 1.000.000")]
         public decimal Price { get; set; }
 
         public string? Image { get; set; }
+
+        public int CategoryID { get; set; }
 
         public Product()
         {
@@ -28,7 +33,8 @@ namespace Lesson_58_HT.Models
             string Name,
             int Quantity,
             decimal Price,
-            string Image
+            string Image,
+            int CategoryID
             )
         {
             this.ID = Autoincrement.GetProductID();
@@ -36,6 +42,7 @@ namespace Lesson_58_HT.Models
             this.Quantity = Quantity;
             this.Price = Price;
             this.Image = Image;
+            this.CategoryID = CategoryID;
         }
 
 
