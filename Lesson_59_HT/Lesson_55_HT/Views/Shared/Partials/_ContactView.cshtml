@@ -1,0 +1,19 @@
+﻿@model Contact
+
+@{
+    string img_path = $"~/media/foto{@Model.ContactId}.jpeg";
+
+    LocationRepository locRep = (LocationRepository)ViewBag.LoacationList;
+}
+
+
+
+<a asp-controller="Contact" asp-action="Details" asp-route-id="@Model.ContactId">
+    <div class="Contact">
+        <img src="@Url.Content(img_path)" alt="">
+        <h4>@Model.Name <br> @Model.Surname</h4>
+        <p>@locRep.GetByID(Model.LocationId).LocationName</p>
+    </div>
+</a>
+
+

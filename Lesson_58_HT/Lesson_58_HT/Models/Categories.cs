@@ -1,4 +1,5 @@
-﻿namespace Lesson_58_HT.Models
+﻿
+namespace Lesson_58_HT.Models
 {
     public class Categories
     {
@@ -10,6 +11,7 @@
             this.ID = id;
             this.Name = name;
         }
+   
 
 
 

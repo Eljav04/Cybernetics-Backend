@@ -1,0 +1,51 @@
+﻿@section MyCss{
+    <link rel="stylesheet" href="~/css/main.css" type="text/css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Parkinsans:wght@300..800&display=swap" rel="stylesheet">
+}
+
+@{
+    string img_path = $"~/media/foto{@Model.ContactId}.jpeg";
+    LocationRepository locRep = (LocationRepository)ViewBag.LoacationList;
+    PhoneNumRepository phoneRep = (PhoneNumRepository)ViewBag.PhonesList;
+    List<PhoneNumber> numbersList = phoneRep.GetByID(Model.ContactId);
+}
+
+
+@model Contact
+
+<div class="ContactDetails_Container">
+    <div class="ContactDetails_ImgBlock">
+        <img src=@Url.Content(img_path) alt="">
+    </div>
+    <ul class="ContactDetails_InfoBlock">
+        <li>
+            <p>Name: </p>
+            <h4>@Model.Name</h4>
+        </li>
+        <li>
+            <p>Surname: </p>
+            <h4>@Model.Surname</h4>
+        </li>
+        <li>
+            <p>Phone numbers: </p>
+            
+         @foreach(PhoneNumber phoneNumber in numbersList) {
+                 <h4>
+                     @phoneNumber.PhoneNumber1
+                 </h4>
+             }
+
+        </li>
+        <li>
+            <p>Email: </p>
+            <h4>@Model.Email</h4>
+        </li>
+        <li>
+            <p>Location: </p>
+            <h4>@locRep.GetByID(Model.LocationId).LocationName</h4>
+        </li>
+
+    </ul>
+</div>

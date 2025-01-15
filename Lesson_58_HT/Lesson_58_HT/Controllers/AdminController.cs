@@ -81,24 +81,45 @@ namespace Lesson_58_HT.Controllers
 
             if (productImg != null)
             {
-                var fileName = Path.Combine(
-                    env.WebRootPath + "/uploaded", 
-                    Path.GetFileName(productImg.FileName));
+                string file_extension = Path.GetExtension(productImg.FileName);
 
-                productImg.CopyTo(new FileStream(fileName, FileMode.Create));
+                List<string> AvaliableExt = new() { ".jpg", ".jpeg", ".png" };
+
+                if (!AvaliableExt.Contains(file_extension))
+                {
+                    ModelState.AddModelError("Image", "You must upload only .jpg .jpeg .png type images");
+                    return View(product);
+                }
+
+                long file_sise = productImg.Length;
+
+                if (file_sise/(1024*1024) > 1)
+                {
+                    ModelState.AddModelError("Image", "You must upload a image with size less than 10mb");
+                    return View(product);
+                }
+
+                var formatedDate = DateTime.Now.ToString("yyyy-MM-ddTHH_mm_ss");
+                var imageName = product.Name + "(" + formatedDate + ")" + file_extension;
+
+                var filePath = Path.Combine(
+                    env.WebRootPath + "/uploaded", 
+                    imageName);
+
+                productImg.CopyTo(new FileStream(filePath, FileMode.Create));
 
                 product.Image =  "~/uploaded/" + 
-                    Path.GetFileName(productImg.FileName);
+                    imageName;
             }
             else
             {
-                ViewBag.IsUploadImg = false;
+                ModelState.AddModelError("Image", "You must upload a product image");
                 return View(product);
             }
 
             if (!ModelState.IsValid)
             {
-                ViewBag.IsUploadImg = true;
+   
                 return View(product);
             }
 

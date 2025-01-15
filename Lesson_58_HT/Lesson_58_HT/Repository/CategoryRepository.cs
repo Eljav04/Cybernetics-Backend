@@ -6,6 +6,7 @@ namespace Lesson_58_HT.Repository
     {
         private static List<Categories> CategorisList = new()
         {
+            new Categories(0, "All"),
             new Categories(1, "Electronics"),
             new Categories(2, "Furniture"),
             new Categories(3, "Health")

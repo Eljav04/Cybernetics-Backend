@@ -1,0 +1,18 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+@model List<Product>
+
+<div>
+    @foreach(Product product in Model)
+{
+            <ul>
+                <li>
+                    @product.Name
+                    @product.Price
+                    @product.Category.Name
+                </li>
+            </ul>
+}
+</div>

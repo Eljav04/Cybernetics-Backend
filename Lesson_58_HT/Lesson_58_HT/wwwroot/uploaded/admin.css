@@ -1,0 +1,305 @@
+* {
+    box-sizing: border-box;
+    font-family: "Montserrat", serif;
+}
+
+ul {
+    list-style-type: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+.AdminPanel_Info {
+    margin: 50px 0 0;
+    text-align: center;
+    font-size: 50px;
+}
+
+.AdminPanel_Choose {
+    font-size: 30px;
+    margin: 10px 0 30px;
+    font-weight: 500;
+    color: gray;
+    text-align: center;
+}
+
+.Btns_Container {
+    display: flex;
+    flex-direction: column;
+
+    gap: 30px;
+
+    width: 400px;
+    margin: 0 auto;
+
+}
+
+.Btns_Container a {
+    margin: 0;
+
+    display: block;
+    padding: 20px 50px;
+    text-align: center;
+
+    font-size: 25px;
+    font-weight: 500;
+
+    background-color: rgb(43, 177, 132);
+    color: #FFF;
+    border-radius: 10px;
+
+    transition: all ease 0.3;
+}
+
+.Btns_Container a:nth-child(2) {
+    background-color: rgb(223, 166, 61);
+
+}
+
+.Btns_Container a:nth-child(3) {
+    background-color: rgb(207, 62, 52);
+
+}
+
+.Btns_Container a:hover {
+    opacity: 80%;
+}
+
+/* Add CSS */
+
+.Add_Form {
+    max-width: 1200px;
+
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.Add_Form label {
+    font-size: 30px;
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+
+.Add_Form input[type="text"],
+.Add_Form input[type="number"],
+select {
+    padding: 10px;
+    width: 100%;
+    height: 50px;
+
+    border: 2px solid transparent;
+    box-shadow: 3px 3px 80px 3px rgba(0, 0, 0, 0.192);
+
+    border-radius: 20px;
+    margin-bottom: 40px;
+
+    padding-left: 20px;
+
+    font-size: 20px;
+
+
+}
+
+
+.Add_Form input:focus,
+select {
+    border: 2px solid rgba(23, 45, 170, 0.534);
+    outline: none;
+
+}
+
+.Submit,
+.Delete {
+    display: block;
+    padding: 12px 15px;
+
+    width: 150px;
+    border: none;
+
+    color: #FFF;
+    font-size: 22px;
+    font-weight: 700;
+    border-radius: 20px;
+    background-color: rgb(25, 96, 230);
+
+    border: 2px solid transparent;
+
+    transition: all ease 0.6;
+}
+
+.Delete {
+    background-color: rgb(230, 25, 25);
+
+}
+
+.Submit:hover {
+    border-color: rgb(25, 96, 230);
+    color: rgb(25, 96, 230);
+    background-color: #FFF;
+
+    box-shadow: 0px 0px 10px 3px rgba(25, 97, 230, 0.363);
+}
+
+/********** File Input Style starts here ********/
+
+.ChooseBtn_Container {
+    align-self: center;
+    margin: 20px 0 40px;
+
+    max-width: 50%;
+
+
+}
+
+.inputfile {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+
+}
+
+.inputfile+label {
+    max-width: 100%;
+    font-size: 1.25rem;
+    /* 20px */
+    font-weight: 700;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    cursor: pointer;
+    display: inline-block;
+    overflow: hidden;
+    padding: 0.625rem 1.25rem;
+    /* 10px 20px */
+
+    border-radius: 10px;
+}
+
+.no-js .inputfile+label {
+    display: none;
+}
+
+.inputfile:focus+label,
+.inputfile.has-focus+label {
+    outline: 1px dotted #000;
+    outline: -webkit-focus-ring-color auto 5px;
+}
+
+
+.inputfile+label svg {
+    width: 1em;
+    height: 1em;
+    vertical-align: middle;
+    fill: currentColor;
+    margin-top: -0.25em;
+    /* 4px */
+    margin-right: 0.25em;
+    /* 4px */
+}
+
+
+/* style 1 */
+
+.inputfile-1+label {
+    color: #f1e5e6;
+    background-color: #d3394c;
+}
+
+.inputfile-1:focus+label,
+.inputfile-1.has-focus+label,
+.inputfile-1+label:hover {
+    background-color: #722040;
+}
+
+
+
+/*LogIn CSS*/
+
+
+.login {
+    width: 400px;
+    margin: 16px auto;
+    font-size: 16px;
+}
+
+    /* Reset top and bottom margins from certain elements */
+    .login-header,
+    .login p {
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+
+/* The triangle form is achieved by a CSS hack */
+.login-triangle {
+    width: 0;
+    margin-right: auto;
+    margin-left: auto;
+    border: 12px solid transparent;
+    border-bottom-color: #28d;
+}
+
+.login-header {
+    background: #28d;
+    padding: 20px;
+    font-size: 1.4em;
+    font-weight: normal;
+    text-align: center;
+    text-transform: uppercase;
+    color: #fff;
+}
+
+.login-container {
+    background: #ebebeb;
+    padding: 12px;
+}
+
+/* Every row inside .login-container is defined with p tags */
+.login p {
+    padding: 12px;
+}
+
+.login input {
+    box-sizing: border-box;
+    display: block;
+    width: 100%;
+    border-width: 1px;
+    border-style: solid;
+    padding: 16px;
+    outline: 0;
+    font-family: inherit;
+    font-size: 0.95em;
+}
+
+    .login input[type="email"],
+    .login input[type="password"] {
+        background: #fff;
+        border-color: #bbb;
+        color: #555;
+    }
+
+        /* Text fields' focus effect */
+        .login input[type="email"]:focus,
+        .login input[type="password"]:focus {
+            border-color: #888;
+        }
+
+    .login input[type="submit"] {
+        background: #28d;
+        border-color: transparent;
+        color: #fff;
+        cursor: pointer;
+    }
+
+        .login input[type="submit"]:hover {
+            background: #17c;
+        }
+
+        /* Buttons' focus effect */
+        .login input[type="submit"]:focus {
+            border-color: #05a;
+        }

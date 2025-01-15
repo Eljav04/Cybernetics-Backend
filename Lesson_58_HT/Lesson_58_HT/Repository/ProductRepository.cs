@@ -53,6 +53,28 @@ namespace Lesson_58_HT.Repository
             product.CategoryID = updated_product.CategoryID;
         }
 
+        public static void BuyProductByID(int id) {
+            Product product = ProductList.FirstOrDefault(p => p.ID == id);
+
+            if(product is not null) {
+                product.Quantity--;
+            }
+
+        }
+
+        public static List<Product> GetProductsByName(string Name)
+        {
+            Name = Name.Trim();
+            Name = Name.ToLower();
+
+            List<Product> returnList = ProductList.Where(
+                p => p.Name.ToLower().Contains(Name)
+                ).ToList();
+
+            return returnList;
+
+        }
+
 
 
 

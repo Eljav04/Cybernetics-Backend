@@ -16,22 +16,42 @@ namespace Lesson_58_HT.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index(int? Category)
+        public IActionResult Index(int? Category, string? SearchString, string? Brand)
         {
-            SelectList CategoriesSelectList = new SelectList(CategoryRepository.GetCategories(), "ID", "Name");
+            List<SelectListItem> CategoriesSelectList = new() {
+            new SelectListItem { Text = "Choose", Value = "", Disabled = true, Selected = true }
+                };
+            CategoriesSelectList.AddRange( new SelectList(CategoryRepository.GetCategories(), "ID", "Name").ToList());
+
+
             ViewBag.CategoriesSelect = CategoriesSelectList;
+            ViewBag.BrandsList = new List<string>() { "Apple", "Sony", "Samsung" };
 
             List<Product> ProductList = ProductRepository.GetProducts();
 
-            if (Category is not null) {
+            if (Category is not null && Category != 0) {
                 ProductList = ProductRepository.GetProductByCategory(Category);
+            }
+
+            if (SearchString is not null)
+            {
+                ProductList = ProductRepository.GetProductsByName(SearchString);
+            }
+
+            if(Brand is not null)
+            {
+                ProductList = ProductRepository.GetProductsByName(Brand);
             }
 
             return View(ProductList);
         }
 
+        
+
+
         public IActionResult Details(int id)
         {
+            ProductRepository.BuyProductByID(id);
             return View(ProductRepository.GetProductByID(id));
         }
 

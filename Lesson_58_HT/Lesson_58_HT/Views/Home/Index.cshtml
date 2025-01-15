@@ -1,4 +1,6 @@
-﻿@{
+﻿
+
+@{
     ViewData["Title"] = "Products";
 }
 
@@ -11,13 +13,33 @@
 <form asp-action="Index" method="get">
     <div class="menu-search-container">
         <div class="dropdown">
-            @Html.DropDownList("Category", (SelectList)ViewBag.CategoriesSelect, "Choose")
+            @Html.DropDownList("Category", (List<SelectListItem>)ViewBag.CategoriesSelect)
+
+           
         </div>
+        <ul>
+            @foreach(string values in ViewBag.BrandsList)
+            {
+               <li>
+                <input type="radio" name="Brand" value="@values" id="@values"/>
+                <label  for="@values">@values</label>
+               </li>
+            }
+           
+            
+        </ul>
         <div class="search-bar">
             <input type="submit" value="Search">
         </div>
     </div>
 </form>
+
+<div class="search-container">
+    <form method="get" asp-action="Index">
+        <input type="text" placeholder="Search here..." name="SearchString" id="SearchString">
+        <input type="submit" placeholder="Search">
+    </form>
+</div>
 
 
 <div class="Card_Container">
@@ -25,7 +47,7 @@
         <ul class="Card">
             <li class="Card_Main">
                 <img src="@Url.Content(product.Image)" alt="">
-
+                   
                 <h4>
                     @product.Name
                 </h4>
@@ -35,11 +57,11 @@
                 <p class="Card_Price">
                     @product.Price $
                 </p>
-
+                
             </li>
             <li>
                 <a asp-controller="Home" asp-action="Details" asp-route-id="@product.ID">
-                    Details
+                    Buy
                 </a>
             </li>
         </ul>
