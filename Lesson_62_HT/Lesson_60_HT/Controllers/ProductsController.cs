@@ -13,8 +13,9 @@ namespace Lesson_60_HT.Controllers
     {
         private readonly ScafDbContext _context;
 
-        public ProductsController(ScafDbContext context)
+        public ProductsController()
         {
+            ScafDbContext context = new();
             _context = context;
         }
 
