@@ -1,0 +1,41 @@
+﻿@model Course
+
+<div class="section">
+			<!-- container -->
+			<div class="container">
+				<!-- row -->
+				<div class="row">
+					<!-- Post content -->
+					<div class="col-md-8">
+						<div class="section-row sticky-container">
+							<div class="main-post">
+								<h3>@Model.Name</h3>
+								<p>@Model.Description </p>
+								<figure class="figure-img">
+									<img class="img-responsive" src="~/img/post-4.jpg" alt="">
+								</figure>
+							</div>
+							
+						</div>
+					</div>
+
+					<div class="col-md-4">
+						<div class="aside-widget">
+							<div class="section-title">
+								<h2>Featured Posts</h2>
+							</div>
+							@await Component.InvokeAsync("FeaturedCourses")
+						</div>
+					</div>
+					
+						
+
+						
+					
+					<!-- /aside -->
+
+				</div>
+				<!-- /row -->
+			</div>
+			<!-- /container -->
+		</div>

@@ -1,0 +1,35 @@
+﻿
+
+<div class="section">
+	<!-- container -->
+	<div class="container">
+		<!-- row -->
+		<!-- row -->
+		<div class="row">
+			
+			@foreach (var courses in ViewBag.Courses)
+			{
+				<div class="col-md-4">
+					<div class="post">
+						<a asp-controller="Home" asp-action="CourseDetail" asp-route-id=@courses.Id class="post-img"><img src="~/img/post-3.jpg" alt=""></a>
+						<div class="post-body">
+							<div class="post-meta">
+								<a class="post-category cat-1" href="category.html"></a>
+								<span class="post-date">March 27, 2018</span>
+								<a asp-controller="Home" asp-action="RemoveCourse" method="post" asp-route-id=@courses.Id class="post-category cat-3">Delete</a>
+							</div>
+							<h3 class="post-title"><a>@courses.Name</a></h3><a>@courses.Description</a>
+						</div>
+					</div>
+				</div>
+			}
+
+			<!-- post -->
+			<!-- /post -->
+
+
+		</div>
+
+	</div>
+	<!-- /container -->
+</div>
